@@ -14,7 +14,7 @@ It also provides a web interface for viewing the list.
 a json formatted AMQP message at regular intervals. This agent is designed to be trivially installed in a
 few seconds with python's pip tool.
 
-[**shoal-client**])(shoal-client) is a reference client that can be used to contact the REST interface of the shoal-server.
+[**shoal-client**](shoal-client) is a reference client that can be used to contact the REST interface of the shoal-server.
 
 ## DockerHub
 
