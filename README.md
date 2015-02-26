@@ -1,7 +1,7 @@
 #Shoal Docker Repository
 
 This repository contains the Docker files for packaging the various components of the [Shoal](https://github.com/hep-gc/shoal)
-web cachce publishing system. For details of how show works checkout the [Shoal GitHib Page](https://github.com/hep-gc/shoal)
+web cache publishing system. For details of how shoal works checkout the [Shoal GitHib Page](https://github.com/hep-gc/shoal)
 
 
 ## Avalable Dockers
@@ -18,6 +18,6 @@ few seconds with python's pip tool.
 
 ## DockerHub
 
-All dockers are autobuilt on DockerHub from a CentOS 6. See the  [uvichep docker page](https://registry.hub.docker.com/repos/uvichep/).
+All docker images are autobuilt on DockerHub from a CentOS 6 base. See the  [uvichep docker page](https://registry.hub.docker.com/repos/uvichep/).
 
 

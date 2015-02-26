@@ -1,22 +1,20 @@
-# docker-shoal-server-rabbit
-The RabbitMQ server has been installed in the container
+##shoal-server-rabbitmq Dockerfile
 
-Configuration: Edit the configuration file /etc/shoal/shoal_server.conf
+This Dockerfile triggers an autobuild on the Docker Hub Registery for an image containing the shoal-server-rabbitmq component of the [Shoal](https://github.com/hep-gc/shoal) web cache publishing system. For details of how shoal works checkout the [Shoal GitHib Page](https://github.com/hep-gc/shoal).
 
-Running Container: expose port 80 - HTTP, 5671 & 5672 - AMQP with and without TLS
+##Configuration
 
-Overview:
+Edit the configuration file /etc/shoal/shoal_server.conf
 
-Shoal is a scalable squid cache publishing and advertising tool developed for highly dynamic environments.
+##Running Container 
 
-There are the three components to shoal.
+Expose port 80 - HTTP, 5671 & 5672 - AMQP with and without TLS
 
-Server: shoal-server maintains the list of running squids. Through RabbitMQ it handles incoming AMQP messages from squid servers. An ordered list of squids can be retrieved in a json format through the REST interface. A human formatted web interface is also provided.
+##DockerHub
 
-Agent: shoal-agent runs on squid servers publishing their load and IP to the shoal-server through json formatted AMQP messages at regular intervals.
+All docker images are autobuilt on DockerHub from a CentOS 6 base. See the  [uvichep docker page](https://registry.hub.docker.com/repos/uvichep/).
 
-Client: shoal-client is a reference client that can be used to contact the shoal-server through the REST interface.
 
-Shoal was developed and is maintained by the University of Victoria High Energy Physics Research Computation Group.
+##GitHub
 
-It lives on GitHub: github.com/hep-gc/shoal
+The shoal-server-rabbitmq Docker image is autobuilt from the [shoal-server-rabbitmq Dockerfile](https://github.com/hep-gc/docker-shoal/blob/master/shoal-server-rabbitmq/Dockerfile) on GitHub.

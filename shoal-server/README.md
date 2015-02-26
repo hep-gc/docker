@@ -1,22 +1,22 @@
-# docker-shoal-server
-Configuration: Edit the configuration file /etc/shoal/shoal_server.conf
+# shoal-server Dockerfile
+
+This Dockerfile triggers an autobuild on the Docker Hub Registery for an image containing the shoal-server component of the [Shoal](https://github.com/hep-gc/shoal) web cache publishing system. For details of how shoal works checkout the [Shoal GitHib Page](https://github.com/hep-gc/shoal).
+
+##Configuration
+
+Edit the configuration file /etc/shoal/shoal_server.conf
 
 The RabbitMQ server can be installed by running yum install rabbitmq Alternately there is a Docker Container with RabbitMQ already installed uvichep/shoal-server-rabbitmq
 
-Running Container: expose port 80 - HTTP, 5671 & 5672 - AMQP with and without TLS
+##Running Container 
 
-Overview:
+Expose port 80 - HTTP, 5671 & 5672 - AMQP with and without TLS
 
-Shoal is a scalable squid cache publishing and advertising tool developed for highly dynamic environments.
+##DockerHub
 
-There are the three components to shoal.
+All docker images are autobuilt on DockerHub from a CentOS 6 base. See the  [uvichep docker page](https://registry.hub.docker.com/repos/uvichep/).
 
-Server: shoal-server maintains the list of running squids. Through RabbitMQ it handles incoming AMQP messages from squid servers. An ordered list of squids can be retrieved in a json format through the REST interface. A human formatted web interface is also provided.
 
-Agent: shoal-agent runs on squid servers publishing their load and IP to the shoal-server through json formatted AMQP messages at regular intervals.
+##GitHub
 
-Client: shoal-client is a reference client that can be used to contact the shoal-server through the REST interface.
-
-Shoal was developed and is maintained by the University of Victoria High Energy Physics Research Computation Group.
-
-It lives on GitHub: github.com/hep-gc/shoal
+The shoal-server Docker image is autobuilt from the [shoal-server Dockerfile](https://github.com/hep-gc/docker-shoal/blob/master/shoal-server/Dockerfile) on GitHub.

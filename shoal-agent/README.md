@@ -1,23 +1,21 @@
-# docker-shoal-agent
-Configuration: Edit the configuration file /etc/shoal/shoal_agent.conf
+# shoal-agent Dockerfile
 
-Commands: service shoal-agent [start | stop | reload | status | force restart]
+This Dockerfile triggers an autobuild on the Docker Hub Registery for an image containing the shoal-agent component of the [Shoal](https://github.com/hep-gc/shoal) web cache publishing system. For details of how shoal works checkout the [Shoal GitHib Page](https://github.com/hep-gc/shoal).
 
-Overview:
+##Configuration
 
-Shoal is a scalable squid cache publishing and advertising tool developed for highly dynamic environments.
+Edit the configuration file /etc/shoal/shoal_agent.conf
 
-There are the three components to shoal.
+##Commands
 
-Server: shoal-server maintains the list of running squids. Through RabbitMQ it handles incoming AMQP messages from squid servers. An ordered list of squids can be retrieved in a json format through the REST interface. A human formatted web interface is also provided.
+service shoal-agent [start | stop | reload | status | force restart]
 
-Agent: shoal-agent runs on squid servers publishing their load and IP to the shoal-server through json formatted AMQP messages at regular intervals.
 
-Client: shoal-client is a reference client that can be used to contact the shoal-server through the REST interface.
+##DockerHub
 
-Shoal was developed, and is maintained, by the University of Victoria High Energy Physics Research Computation Group.
+All docker images are autobuilt on DockerHub from a CentOS 6 base. See the  [uvichep docker page](https://registry.hub.docker.com/repos/uvichep/).
 
-It lives on GitHub: github.com/hep-gc/shoal
-Comments
 
-No comments available, be the first to comment.
+##GitHub
+
+The shoal-agent Docker image is autobuilt from the [shoal-agent Dockerfile](https://github.com/hep-gc/docker-shoal/blob/master/shoal-agent/Dockerfile) on GitHub.

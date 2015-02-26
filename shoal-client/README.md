@@ -1,20 +1,21 @@
-# docker-shoal-client
-Configuration: Edit the configuration file /etc/shoal/shoal-client.conf
+# shoal-client Dockerfile
 
-Commands: shoal-client –dump show what would have been written to the CVMFS config file
+This Dockerfile triggers an autobuild on the Docker Hub Registery for an image containing the shoal-client component of the [Shoal](https://github.com/hep-gc/shoal) web cache publishing system. For details of how shoal works checkout the [Shoal GitHib Page](https://github.com/hep-gc/shoal).
 
-Overview:
+##Configuration
 
-Shoal is a scalable squid cache publishing and advertising tool developed for highly dynamic environments.
+Edit the configuration file /etc/shoal/shoal-client.conf
 
-There are the three components to shoal.
+##Commands
 
-Server: shoal-server maintains the list of running squids. Through RabbitMQ it handles incoming AMQP messages from squid servers. An ordered list of squids can be retrieved in a json format through the REST interface. A human formatted web interface is also provided.
+shoal-client --dump to show what would have been written to the CVMFS config file
 
-Agent: shoal-agent runs on squid servers publishing their load and IP to the shoal-server through json formatted AMQP messages at regular intervals.
+##DockerHub
 
-Client: shoal-client is a reference client that can be used to contact the shoal-server through the REST interface.
+All docker images are autobuilt on DockerHub from a CentOS 6 base. See the  [uvichep docker page](https://registry.hub.docker.com/repos/uvichep/).
 
-Shoal was developed, and is maintained, by the University of Victoria High Energy Physics Research Computation Group.
 
-It lives on GitHub: github.com/hep-gc/shoal
+##GitHub
+
+The shoal-client Docker image is autobuilt from the [shoal-client Dockerfile](https://github.com/hep-gc/docker-shoal/blob/master/shoal-client/Dockerfile) on GitHub.
+
