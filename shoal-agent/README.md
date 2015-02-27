@@ -2,6 +2,10 @@
 
 This Dockerfile triggers an autobuild on the Docker Hub Registery for an image containing the shoal-agent component of the [Shoal](https://github.com/hep-gc/shoal) web cache publishing system. For details of how shoal works checkout the [Shoal GitHib Page](https://github.com/hep-gc/shoal).
 
+##Run Docker Image
+
+docker run uvichep/shoal-agent <IP address of AMQP Server> <external IP address of host>
+
 ##Configuration
 
 Edit the configuration file /etc/shoal/shoal_agent.conf
