@@ -4,7 +4,7 @@ This Dockerfile triggers an autobuild on the Docker Hub Registery for an image c
 
 ##Run Docker Image
 
-docker run uvichep/shoal-agent <IP address of AMQP Server> <external IP address of host>
+docker run -d uvichep/shoal-agent {IP address of AMQP Server} {external IP address of host}
 
 ##Configuration
 
