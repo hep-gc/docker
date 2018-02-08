@@ -6,3 +6,4 @@ azure-servicemanagement-legacy
 web.py
 requests
 pathlib2
+libvirt-python
