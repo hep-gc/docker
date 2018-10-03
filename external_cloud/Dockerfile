@@ -21,14 +21,16 @@ RUN cp condor_config.local /etc/condor/
 #install cloudscheduler
 RUN wget https://github.com/hep-gc/cloud-scheduler/archive/dev.zip && unzip dev.zip && rm dev.zip
 RUN cd cloud-scheduler-dev && python setup.py install
+
 RUN cp /jobs/cloud-scheduler-dev/scripts/cloud_scheduler.init.d /etc/init.d/cloud_scheduler && cp /jobs/cloud-scheduler-dev/scripts/cloud_scheduler.sysconf /etc/sysconfig/cloud_scheduler && mkdir /etc/cloudscheduler && cp /jobs/cloud_resources.conf /etc/cloudscheduler && cp /jobs/cloud_scheduler.conf /etc/cloudscheduler && cp /jobs/default.yaml /etc/cloudscheduler && cp /jobs/cloud-scheduler-dev/cloudscheduler/defaults.cfg /etc/cloudscheduler
+
 RUN cd /srv && mkdir userdata && cp /jobs/benchmark.yaml /srv/userdata/ && cp /jobs/verifycs.yaml /srv/userdata/
 
 #configure ssh keys
 RUN ssh-keygen -q -f /root/.ssh/id_rsa -N "" && python generate-keyfile.py && cp auth-key.yaml /etc/cloudscheduler/auth-key.yaml 
 
-#make the directories for images
-RUN mkdir -p /jobs/instances/base && chmod +x startup.sh
+#make the directories for local images
+RUN mkdir -p /jobs/instances/base 
 
 # make the condor user accessible
 RUN chsh -s /bin/bash condor
@@ -36,4 +38,6 @@ RUN chsh -s /bin/bash condor
 # create a log directory for the condor user
 RUN mkdir /var/lib/condor/logs
 
+# Run the startup.sh script
+RUN chmod +x startup.sh
 CMD ./startup.sh
