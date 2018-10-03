@@ -672,8 +672,9 @@ users:
     shell: /sbin/nologin
 
 runcmd:
- - [ systemctl, start, condor ]
+ - [ service, start, condor ]
 
+# Add any public rsa keys to be used to access launched VMs if needed here
 ssh_authorized_keys:
  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ13KaaMGJ1ifkQpDAuB3CCHEO6wn8XIKJgm5EYBGxEF5uPiyTQlb1/AtwBmruQkPuYJNcfnlG5wk1LTeDBW2Znp5qb3GTnN0zWnj7PmzOKIbH8Wo/sQB3ufW/hA1VorDMXEXM7rCefPhVu/YUoNAnafx4DMX9sszm/BS9O5Z+LprVyJfEaAKH9ZwP15RuzLCB1K4MdbYMULSTcYbdIQ0vBujZz53oRQOEDHfBBrqdiC4MqUfaa6q8OitmglhP5YjYjio1A68kyRwXDuekKhKvP+yqezZZh2PPoKP2q6rHxvfQl2NDJhCmuO4z82iWVTL/RcbGkZEJZhmg1c+oulT1 danikamacdonell@Danikas-MacBook-Pro.local
  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnA31VjkLuT4RbmO1n2Q7hmIr0lC1+7lcCCQ2lPQqQIbGHgCNl5ffHMty0dj+wNfBPW+Qcp3W6cO/KxHmt77JDO78QjMgh73VUxcyyZtTn7TDDLeyaCQ1vReXeqJ5SL8KeN3eJPG83vUQfFXSJVw96dg3grfGTee+lDHPIX31VKVD2Yx+UAGy7h4VB8NAo/dCTYepRElkO1XEF80ap3V9Y509To/34hflXG8fr2kaqeR4Zogv2tXt3ndhrn3CDzr3YCIRt5SPjg23bSXF+aHNbfo73xwLAOU1wy49PwH5oa1NVNZTiZF1oQu+gAV9MuuSEfNBWbadgm2E07N+zzgJb danikam1@heplw44
