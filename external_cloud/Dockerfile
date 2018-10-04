@@ -36,7 +36,7 @@ RUN mkdir -p /jobs/instances/base
 RUN chsh -s /bin/bash condor
 
 # create a log directory for the condor user
-RUN mkdir /var/lib/condor/logs
+RUN mkdir /var/lib/condor/logs && chown condor /var/lib/condor && chown condor /var/lib/condor/logs
 
 # Run the startup.sh script
 RUN chmod +x startup.sh
