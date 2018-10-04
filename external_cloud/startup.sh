@@ -8,7 +8,12 @@
 
 # start cloudscheduler, disable container-cloud, and enable cc-west cloud
 /etc/init.d/cloud_scheduler start
+
+# sleep for 2s while cloud scheduler starts
+sleep 2
+
+# disable the container-cloud cloud and enable the otter-container cloud
 cloud_admin -d container-cloud
-cloud_admin -e cc-west-a
+cloud_admin -e otter-container
 
 while true; do sleep 1; done 
