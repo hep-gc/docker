@@ -35,16 +35,18 @@ To successfully launch VMs on external clusters from your machine, the following
 2. Starting in the external_cloud, build the docker container that will be running cloudscheduler and condor
 
     $ sudo docker build .
-    
-3. Run the docker container using the last container ID printed during the build output, forwarding the ports used by condor and cloudscheduler:
 
-    $ docker run -itd --privileged --network host -p 9618:9618 -p 40000-40500:40000-40500 -p 8080:8080 [container ID]
+The last line of the output following this build command should read "Successfully built [container ID]". 
+    
+3. Run the docker container using the container ID printed in the last line of the build output, forwarding the ports used by condor and cloudscheduler:
+
+    $ docker run -itd --privileged -p 9618:9618 -p 40000-40500:40000-40500 [container ID]
 
     This will output the ID of the running container.
 
 4. Start a bash shell in the running docker container:
 
-    $ docker exec -it [running container ID]
+    $ docker exec -it [running container ID] /bin/bash
 
 5. The container should already be running condor and cloudscheduler, with the otter-container cloud enabled. The computecanada west cloud is also configured in the /etc/cloudscheduler/cloud_resources.conf file. More clouds can be added to the cloud_resources.conf file as needed. 
 
@@ -92,6 +94,8 @@ To successfully launch VMs on external clusters from your machine, the following
     For more information, use the better-analyze option
 
     $ condor_status -better-analyze
+
+    Note that it may take ~5-10 minutes for the VM to boot and the job to start running.
 
     
 
