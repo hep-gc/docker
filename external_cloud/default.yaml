@@ -10,7 +10,7 @@ write_files:
 
         ## Hostname of the central manager.
         # Prefer value contextualized by Cloud Scheduler and then use central_manager
-        CONDOR_HOST=206.12.97.182
+        CONDOR_HOST=myhost.localhost
 
         SEC_DAEMON_AUTHENTICATION =
         SEC_DAEMON_AUTHENTICATION_METHODS =
@@ -129,7 +129,8 @@ write_files:
         # Ensure that the settings below are correct for your Condor
         # installation.
         EC2_METADATA=169.254.169.254
-        CENTRAL_MANAGER=`cat /etc/condor/central_manager 2>/dev/null`
+        #CENTRAL_MANAGER=`cat /etc/condor/central_manager 2>/dev/null`
+        CENTRAL_MANAGER=206.12.97.182
         START_REQUIREMENT=`cat /etc/condor/start_req_config 2>/dev/null`
         CONDOR_CONFIG=/etc/condor/condor_config
         CONDOR_CONFIG_VAL=/usr/bin/condor_config_val
@@ -612,11 +613,11 @@ write_files:
     owner: root:root
     permissions: '0755'
     path: /etc/init.d/condor
--   content: |
-        206.12.97.182
-    owner: root:root
-    permissions: '0644'
-    path: /etc/condor/central_manager
+#-   content: |
+#        206.12.97.182
+#    owner: root:root
+#    permissions: '0644'
+#    path: /etc/condor/central_manager
 groups:
   - condor: [slot01,slot02,slot03,slot04,slot05,slot06,slot07,slot08,slot09,slot10,slot11,slot12,slot13,slot14,slot15,slot16]
 
