@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The files in this directory enable a user with access to a machine with a public IP address to create a docker CENTOS 7 container which runs clouscheduler to launch virtual machines (VMs) and run [HTCondor](https://research.cs.wisc.edu/htcondor/description.html) jobs on external clusters. 
+The files in this directory enable a user with access to a machine with a public IP address to create a docker CENTOS 7 container which runs both [HTCondor](https://research.cs.wisc.edu/htcondor/description.html) and cloudscheduler to launch virtual machines (VMs) and run HTCondor jobs on external clusters. 
 
 ## Prerequisites
 
@@ -21,4 +21,77 @@ To successfully launch VMs on external clusters from your machine, the following
 
 ## Instructions
 
-1. cd into the 
+1. Edit the CENTRAL_MANAGER variable on line 134 of default.yaml so it reads: 
+
+    CENTRAL_MANAGER=[your public IP address]
+
+    where your public IP address can be obtained from typing 
+    $ curl ipinfo.io/ip
+
+    Also, edit the NETWORK_INTERFACE variable on line 20 of condor_config.local so it reads:
+
+    NETWORK_INTERFACE = [your public IP address]
+
+2. Starting in the external_cloud, build the docker container that will be running cloudscheduler and condor
+
+    $ sudo docker build .
+    
+3. Run the docker container using the last container ID printed during the build output, forwarding the ports used by condor and cloudscheduler:
+
+    $ docker run -itd --privileged --network host -p 9618:9618 -p 40000-40500:40000-40500 -p 8080:8080 [container ID]
+
+    This will output the ID of the running container.
+
+4. Start a bash shell in the running docker container:
+
+    $ docker exec -it [running container ID]
+
+5. The container should already be running condor and cloudscheduler, with the otter-container cloud enabled. The computecanada west cloud is also configured in the /etc/cloudscheduler/cloud_resources.conf file. More clouds can be added to the cloud_resources.conf file as needed. 
+
+    To see the list of available clouds, type:
+
+    $ cloud_status 
+
+
+      Clouds can enabled or disabled using the cloud_admin command.
+
+      To enable:
+
+      $ cloud_admin -e [cloud name]
+
+      To disable:
+
+      $ cloud_admin -d [cloud name]
+
+      For example, the otter-container cloud can be disabled using:
+
+      $ cloud_admin -d otter-container
+  
+    If any of the files in /etc/cloudscheduler are updated, cloudscheduler needs to be restarted for the changes to take effect:
+
+    $ /etc/init.d/cloudscheduler quickrestart
+
+    After restarting cloudscheduler, clouds will need to be disabled or re-enabled using cloud_admin to get to the original settings. For example, to get back to the default setting of having only otter-container enabled:
+
+    $ cloud_admin -d cc-west-a
+    $ cloud_admin -e otter-container
+
+
+6. The test job try.job in the /jobs directory can be run by switching to condor user, and using the condor_submit command:
+
+    $ su condor
+    $ cd /jobs
+    $ condor_submit try.job
+
+    To switch back to root user, type ctrl-D.
+
+    To check the status of your job in the condor q type:
+
+    $ condor_status
+
+    For more information, use the better-analyze option
+
+    $ condor_status -better-analyze
+
+    
+
