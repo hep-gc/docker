@@ -12,8 +12,8 @@
 # sleep for 2s while cloud scheduler starts
 sleep 2
 
-# disable the container-cloud cloud and enable the otter-container cloud
-cloud_admin -d container-cloud
+# disable the cc-west cloud and enable the otter-container cloud
+cloud_admin -d cc-west-a
 cloud_admin -e otter-container
 
 while true; do sleep 1; done 
