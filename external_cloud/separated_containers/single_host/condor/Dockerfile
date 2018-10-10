@@ -6,7 +6,6 @@ RUN yum install -y openssh && yum -y install wget && yum -y install unzip && yum
 
 WORKDIR /jobs
 ADD . /jobs
-ADD ../requirements.txt /jobs
 
 ADD systemctl.py /usr/bin/systemctl
 RUN chmod +x /usr/bin/systemctl
