@@ -18,9 +18,6 @@ RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/
 RUN yum -y install condor
 RUN cp condor_config.local /etc/condor/ && cp condor_config /etc/condor
 
-#configure ssh keys
-RUN ssh-keygen -q -f /root/.ssh/id_rsa -N "" && python generate-keyfile.py && cp auth-key.yaml /etc/cloudscheduler/auth-key.yaml 
-
 # make the condor user accessible
 RUN chsh -s /bin/bash condor
 
