@@ -2,7 +2,7 @@
 #CONDOR_HOST = $(FULL_HOSTNAME)
 
 # DMM: set the condor host to the IP address of the container running condor 
-CONDOR_HOST = 172.17.0.2
+CONDOR_HOST = condor
 COLLECTOR_NAME = condor collector
 START = TRUE
 SUSPEND = FALSE
