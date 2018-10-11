@@ -78,6 +78,8 @@ SSH_TO_JOB_SSHD_CONFIG_TEMPLATE = /etc/condor/condor_ssh_to_job_sshd_config_temp
 
 CONDOR_HOST = $(FULL_HOSTNAME)
 
+# DMM: The name of the condor scheduler (schedd) needs to be specified in order to
+# specifically reference it when running condor_q from the container running cloudscheduler.
 SCHEDD_NAME = condor_schedd
 
 ##  This macro determines what daemons the condor_master will start and keep its watchful eyes on.
