@@ -16,7 +16,7 @@ RUN pip install --upgrade pip && pip install --upgrade setuptools && pip install
 #condor installation
 RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
 RUN yum -y install condor
-RUN cp condor_config.local /etc/condor/
+RUN cp condor_config.local /etc/condor/ && systemctl enable condor
 
 #install cloudscheduler
 RUN wget https://github.com/hep-gc/cloud-scheduler/archive/dev.zip && unzip dev.zip && rm dev.zip
