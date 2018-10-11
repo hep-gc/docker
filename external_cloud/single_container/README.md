@@ -8,6 +8,8 @@ The files in this directory enable a user with access to a machine with a public
 
 To successfully launch VMs on external clusters from your machine, the following pre-requisites are needed:
 
+* Root access on your machine (or sudo access, in which case all docker commands should be preceded by sudo)
+
 * A running [docker installation](https://runnable.com/docker/install-docker-on-linux)
 
 * The machine must have a public IP address in order to communicate with external clusters. You can determine your public IP address (if it exists) with the following command:
@@ -35,10 +37,10 @@ To successfully launch VMs on external clusters from your machine, the following
 
     NETWORK_INTERFACE = [your public IP address]
 
-2. Starting in the external_cloud, build the docker container that will be running cloudscheduler and condor, and tag the container image as cloud_scheduler:
+2. Starting in the current (external_cloud/single_container) directory, build the docker container that will be running cloudscheduler and condor, and tag the container image as cloud_scheduler:
 
     ~~~~
-    $ sudo docker build -t cloud_scheduler .
+    $ docker build -t cloud_scheduler .
     ~~~~
     
 3. Run a docker container from the cloud_scheduler container image, forwarding the ports used by condor and cloudscheduler, and name the running container cs_container:
