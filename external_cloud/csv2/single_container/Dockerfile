@@ -14,7 +14,7 @@ ADD systemctl.py /usr/bin/systemctl
 RUN chmod +x /usr/bin/systemctl
 
 # Set up and activate a python3 environment
-RUN python get-pip.py && mkdir environments && cd environments && python3.6 -m venv py3_env && source py3_env/bin/activate
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py && mkdir environments && cd environments && python3.6 -m venv py3_env && source py3_env/bin/activate
 
 # Install python requirements
 RUN pip install --upgrade pip && pip install --upgrade setuptools && pip install --upgrade --ignore-installed -r requirements.txt
