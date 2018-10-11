@@ -4,8 +4,9 @@ USER root
 
 RUN yum -y install virt-install && yum install -y openssh && yum -y install wget && yum -y install unzip && yum -y install gcc && yum -y install python-devel && yum -y install net-tools && yum -y install less && yum -y install libvirt && yum -y install qemu-kvm && yum -y install libvirt-devel && yum -y install mkisofs && yum -y install emacs && yum -y install sudo && yum -y install mlocate && yum -y install git
 
-# Install python3
+# Install python3.6
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm && yum -y install python36u && yum -y install python36u-devel
+
 
 WORKDIR /jobs
 ADD . /jobs
@@ -13,17 +14,18 @@ ADD . /jobs
 ADD systemctl.py /usr/bin/systemctl
 RUN chmod +x /usr/bin/systemctl
 
+
 # Install pip3 and python requirements
-RUN yum -y install python36u-pip
-RUN pip3 install --upgrade pip && pip3 install --upgrade setuptools && pip3 install --upgrade --ignore-installed -r requirements.txt
+#RUN yum -y install python36u-pip
+#RUN pip3 install --upgrade pip && pip3 install --upgrade setuptools && pip3 install --upgrade --ignore-installed -r requirements.txt
 
 # Install MariaDB
-RUN cp mariadb.repo /etc/yum.repos.d && yum install MariaDB-server MariaDB-client
+#RUN cp mariadb.repo /etc/yum.repos.d && yum install MariaDB-server MariaDB-client
 
 #condor installation
-RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
-RUN yum -y install condor
-RUN cp condor_config.local /etc/condor/
+#RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
+#RUN yum -y install condor
+#RUN cp condor_config.local /etc/condor/
 
 #install cloudscheduler
 #RUN wget https://github.com/hep-gc/cloud-scheduler/archive/dev.zip && unzip dev.zip && rm dev.zip
@@ -40,11 +42,11 @@ RUN cp condor_config.local /etc/condor/
 #RUN mkdir -p /jobs/instances/base 
 
 # make the condor user accessible
-RUN chsh -s /bin/bash condor
+#RUN chsh -s /bin/bash condor
 
 # create a log directory for the condor user
-RUN mkdir /var/lib/condor/logs && chown condor /var/lib/condor && chown condor /var/lib/condor/logs
+#RUN mkdir /var/lib/condor/logs && chown condor /var/lib/condor && chown condor /var/lib/condor/logs
 
 # Run the startup.sh script
-RUN chmod +x startup.sh
-CMD ./startup.sh
+#RUN chmod +x startup.sh
+#CMD ./startup.sh
