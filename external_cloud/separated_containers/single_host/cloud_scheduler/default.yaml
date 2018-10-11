@@ -14,7 +14,7 @@ write_files:
         
         # DMM: CONDOR_HOST is set to the hostname of the container running condor, which 
         # was specified when creating the condor container.
-        CONDOR_HOST=condor_host_container
+        CONDOR_HOST=htcondor_host
 
         SEC_DAEMON_AUTHENTICATION =
         SEC_DAEMON_AUTHENTICATION_METHODS =
