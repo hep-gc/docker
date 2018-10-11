@@ -114,8 +114,7 @@ To successfully launch VMs on external clusters from your machine, the following
 
 6. The test job try.job in the /jobs directory can be run from the condor container. 
 
-    * Either start in a new shell, or detach from the cloud_scheduler container by typing ctrl-D
-    * Start a bash shell in the container running condor:
+    Either start in a new shell on the host VM, or detach from the cloud_scheduler container by typing ctrl-D. Next, start a bash shell in the container running condor:
 
     ~~~~
     $ docker exec -it cs_condor_1 /bin/bash
