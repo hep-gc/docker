@@ -16,7 +16,7 @@ RUN pip install --upgrade pip && pip install --upgrade setuptools && pip install
 #condor installation
 RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
 RUN yum -y install condor
-RUN cp condor_config.local /etc/condor/ && cp condor_config /etc/condor
+RUN cp condor_config /etc/condor
 
 # make the condor user accessible
 RUN chsh -s /bin/bash condor
