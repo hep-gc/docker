@@ -2,7 +2,7 @@ version: "3"
 services:
   condor:
     build: condor
-    image: condor:condor
+    image: condor
     ports:
       - 9618:9618
       - 40000-40500:40000-40500
@@ -15,7 +15,7 @@ services:
 
   cloud_scheduler:
     build: cloud_scheduler
-    image: cloud_scheduler:cloud_scheduler
+    image: cloud_scheduler
 #    networks:
 #      - cs_net
     hostname: cs_host
