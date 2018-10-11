@@ -10,11 +10,7 @@ write_files:
 
         ## Hostname of the central manager.
         # Prefer value contextualized by Cloud Scheduler and then use central_manager
-        #CONDOR_HOST=myhost.localhost
-        
-        # DMM: CONDOR_HOST is set to the service name of the container running condor, which 
-        # was specified when creating the condor container.
-        CONDOR_HOST = condor
+        CONDOR_HOST=myhost.localhost
 
         SEC_DAEMON_AUTHENTICATION =
         SEC_DAEMON_AUTHENTICATION_METHODS =

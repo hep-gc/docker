@@ -9,6 +9,7 @@ The files in this directory enable a user with access to a machine with a public
 
 To successfully launch VMs on external clusters from your machine, the following pre-requisites are needed:
 
+* Root access on your machine (or sudo access, in which case all docker commands should be preceded by sudo)
 * A running [docker installation](https://runnable.com/docker/install-docker-on-linux)
 * A [docker compose](https://docs.docker.com/v17.09/compose/install/) installation
 
@@ -38,7 +39,7 @@ To successfully launch VMs on external clusters from your machine, the following
 
     NETWORK_INTERFACE = [your public IP address]
 
-2. Start the condor and cloudscheduler services using the docker-compose up command from the current (single_host) directory. Optionally, you can name the project to something other than the default single_host (the name of the current working directory). The example below sets the project name to cs using the -p option in docker-compose:
+2. Start the condor and cloudscheduler services using the docker-compose up command from the current (external_cloud/separated_containers/single_host) directory. Optionally, you can name the project to something other than the default single_host (the name of the current working directory). The example below sets the project name to "cs" using the -p option in docker-compose:
 
     ~~~~
     $ docker-compose -p cs up &

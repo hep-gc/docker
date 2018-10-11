@@ -1,7 +1,5 @@
 # Local config for Cloud Scheduler
-#CONDOR_HOST = $(FULL_HOSTNAME)
-
-# DMM: set the condor host to the IP address of the container running condor 
+# DMM: set the condor host to the name of the condor service
 CONDOR_HOST = condor
 COLLECTOR_NAME = condor collector
 START = TRUE
