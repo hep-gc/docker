@@ -7,20 +7,20 @@ RUN yum -y install virt-install && yum install -y openssh && yum -y install wget
 # Install python3.6
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm && yum -y install python36u && yum -y install python36u-devel
 
-
 WORKDIR /jobs
 ADD . /jobs
 
 ADD systemctl.py /usr/bin/systemctl
 RUN chmod +x /usr/bin/systemctl
 
+# Set up and activate a python3 environment
+python get-pip.py && mkdir environments && cd environments && python3.6 -m venv py3_env && source py3_env/bin/activate
 
-# Install pip3 and python requirements
-#RUN yum -y install python36u-pip
-#RUN pip3 install --upgrade pip && pip3 install --upgrade setuptools && pip3 install --upgrade --ignore-installed -r requirements.txt
+# Install python requirements
+RUN pip install --upgrade pip && pip install --upgrade setuptools && pip install --upgrade --ignore-installed -r requirements.txt
 
 # Install MariaDB
-#RUN cp mariadb.repo /etc/yum.repos.d && yum install MariaDB-server MariaDB-client
+RUN cp mariadb.repo /etc/yum.repos.d && yum install MariaDB-server MariaDB-client
 
 #condor installation
 #RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
