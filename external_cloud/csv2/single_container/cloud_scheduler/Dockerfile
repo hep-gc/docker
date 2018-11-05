@@ -31,12 +31,16 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 WORKDIR /jobs
 ADD . /jobs
 
+# Create systemctl command
+ADD systemctl.py /usr/bin/systemctl
+RUN chmod +x /usr/bin/systemctl
+
 # Create an authorized_keys file
 RUN mkdir /root/.ssh
 RUN touch /root/.ssh/authorized_keys
 
 # Add the host computer's public rsa key to the authorized_keys file (the public rsa key must already exist)
-ADD /root/.ssh/id_rsa.pub /jobs
+#ADD /root/.ssh/id_rsa.pub /jobs
 RUN cat id_rsa.pub >> /root/.ssh/authorized_keys
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]

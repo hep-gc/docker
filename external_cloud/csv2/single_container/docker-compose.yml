@@ -1,0 +1,16 @@
+version: "3"
+services:
+ cloud_scheduler:
+    build: cloud_scheduler
+    image: cloud_scheduler
+    ports:
+      - "9618:9618"
+      - "40000-41000:40000-41000"
+      - "2222:22"
+      - "80:80"
+#    hostname: cs_host
+    privileged: true
+    tty: true
+    stdin_open: true
+    extra_hosts:
+     - "ansible-host:206.12.154.230"
