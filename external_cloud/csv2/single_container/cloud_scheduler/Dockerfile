@@ -45,7 +45,7 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 COPY supervisord.conf /usr/etc/supervisord.conf
 
 # Allow ports 22 and 80 for container
-EXPOSE 22 80 443
+EXPOSE 22 80 443 3306
 
 WORKDIR /jobs
 ADD . /jobs
