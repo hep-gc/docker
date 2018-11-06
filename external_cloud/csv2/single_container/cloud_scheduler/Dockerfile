@@ -8,8 +8,8 @@
 # Adapted by Danika MacDonell for containerized setup of cloudscheduler version 2 (csv2)
 # <danikam1@uvic.ca>
 #
-# build: docker build -t csv2_cont
-# run: docker run docker run -d --name csv2_cont -p 2222:22 -p 80:80 -p 443:443
+# build: docker build -t csv2_cont .
+# run: docker run -d --name csv2_cont_run -p 2222:22 -p 80:80 -p 443:443 csv2_cont
 
 FROM centos:centos7
 
