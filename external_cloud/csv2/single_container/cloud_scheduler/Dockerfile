@@ -8,15 +8,19 @@
 # Adapted by Danika MacDonell for containerized setup of cloudscheduler version 2 (csv2)
 # <danikam1@uvic.ca>
 #
+# Will need to open up port 947 with firewall to ssh onto this port: 
+# >> firewall-cmd --permanent --add-port=947/tcp
+# >> firewall-cmd --reload
 # build: docker build -t csv2_cont .
-# run: docker run -d --name csv2_cont_run -p 2222:22 -p 80:80 -p 443:443 csv2_cont
+# run (host network): docker run -d --privileged --name csv2_cont_run --network=host csv2_cont
+# run (port forwarding): docker run -d --privileged --name csv2_cont_run -p 947:947 -p 80:80 -p 443:443 -p 3306:3306 csv2_cont
 
-FROM centos:centos7
+FROM centos:7
 
 USER root
 
 # Install useful packages
-RUN yum -y install emacs && yum install -y iproute && yum -y install telnet && yum -y install cronie && yum -y install firewalld && yum -y install net-tools && yum -y install mlocate
+RUN yum -y install emacs && yum install -y iproute && yum -y install telnet && yum -y install cronie && yum -y install firewalld && yum -y install net-tools && yum -y install mlocate && yum -y install which
 
 # skip heprc yum mirror if unavailable
 RUN yum-config-manager --save --setopt=heprc.skip_if_unavailable=true
@@ -37,8 +41,8 @@ RUN mkdir /var/run/sshd /var/log/supervisor
 # Generate public rsa key
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' 
 
-# Give root password secret
-RUN echo 'root:secret' | chpasswd
+# Set root password
+RUN echo 'root:supersecret' | chpasswd
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 # Add supervisor's configuration file to the container. Note: This config file is referred by supervisord once started inside container
@@ -63,8 +67,11 @@ RUN touch /root/.ssh/authorized_keys
 RUN cat id_rsa.pub >> /root/.ssh/authorized_keys
 RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAy3lHvsJ7lqjYGNxNfzXCh5VbvYalRPH8SKbYF9+vvJYxc+061Gr+5LOgZ9eXt4MTQc7/Kl+TSwZgk6F2lMjFZGvkfTM5p/+jgRq2SDSRjZvb97h6mlyIEGfeTdpeOJwrWmlcxr9zYR1Vs6u7RxASYDCk+2BNoLk+UkL8TJ8LFLJvu7LIWnl9X4ZSrNz98mVqbtPBzkUoQmPKGngU58Cv3HqKi7Bn74cf4lEWmOKRT2k1YNQ2R5Jqm9x8PWWA4BCh7cdFrEcPhS38Y688vhG1KbhZSPecLE6ShMArTvsNeTKrUOcotzsi812JnV/lw0i7PMtkUmpjTze/fRj8gkGBlQ== root@elephant01.heprc.uvic.ca" >> /root/.ssh/authorized_keys 
 
+# Add openstack.cnf to the /etc/my.cnf.d directory for the mysql daemon to work properly
+RUN mkdir /etc/my.cnf.d
+COPY openstack.cnf /etc/my.cnf.d
+
 # Execute supervisord as entrypoint into the container
 CMD ["/usr/bin/supervisord"]
-
 
 #ENTRYPOINT ["/usr/sbin/sshd", "-D"]
