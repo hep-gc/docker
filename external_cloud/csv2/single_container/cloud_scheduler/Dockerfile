@@ -11,19 +11,20 @@
 # Will need to open up port 947 with firewall to ssh onto this port: 
 # >> firewall-cmd --permanent --add-port=947/tcp
 # >> firewall-cmd --reload
+# create the network: docker network create --subnet=172.28.0.0/16 --ip-range=172.28.5.0/24 --driver bridge cs_net
 # build: docker build -t csv2_cont .
 # run (host network): docker run -d --privileged --name csv2_cont_run --network=host csv2_cont
-# run (port forwarding): docker run -d --privileged --name csv2_cont_run -p 947:947 -p 80:80 -p 443:443 -p 3306:3306 csv2_cont
+# run (port forwarding): docker run -d --privileged --hostname="htc-dev.heprc.uvic.ca" --network=cs_net --ip="172.28.5.1" --name csv2_cont_run -p 947:947 -p 80:80 -p 443:443 -p 3306:3306 -p 9618:9618 -p 40000-40500:40000-40500 csv2_cont
 
 FROM centos:7
 
 USER root
 
 # Install useful packages
-RUN yum -y install emacs && yum install -y iproute && yum -y install telnet && yum -y install cronie && yum -y install firewalld && yum -y install net-tools && yum -y install mlocate && yum -y install which
+RUN yum -y install emacs && yum install -y iproute && yum -y install telnet && yum -y install cronie && yum -y install firewalld && yum -y install net-tools && yum -y install mlocate && yum -y install which && yum -y install sudo
 
 # skip heprc yum mirror if unavailable
-RUN yum-config-manager --save --setopt=heprc.skip_if_unavailable=true
+#RUN yum-config-manager --save --setopt=heprc.skip_if_unavailable=true
 
 # Install packages needed for ssh and httpd
 RUN yum -y update; yum clean all
@@ -48,8 +49,9 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 # Add supervisor's configuration file to the container. Note: This config file is referred by supervisord once started inside container
 COPY supervisord.conf /usr/etc/supervisord.conf
 
-# Allow ports 22 and 80 for container
-EXPOSE 22 80 443 3306
+# Expose needed ports
+EXPOSE 80 443 3306 947 9618
+EXPOSE 40000-40500
 
 WORKDIR /jobs
 ADD . /jobs
