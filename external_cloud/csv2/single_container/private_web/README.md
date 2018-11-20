@@ -77,33 +77,33 @@ To successfully create and set up the csv2 container from scratch, the following
     
 4. Add the otter testing cloud using the csv2 website
 
-Open a web browser, and go to https://htc-dev.heprc.uvic.ca. You will be asked to enter a username and password - use the csv2_default username and password. 
+    Open a web browser, and go to https://htc-dev.heprc.uvic.ca. You will be asked to enter a username and password - use the csv2_default username and password. 
 
-To add the otter testing cloud, press the "Clouds" tab at the top left of the page, then press the "+" button that appears at the top left. Enter the following information:
+    To add the otter testing cloud, press the "Clouds" tab at the top left of the page, then press the "+" button that appears at the top left. Enter the following information:
 
-* Cloud name: otter-container
-* URL: https://otter.heprc.uvic.ca:15000/v3
-* Project: testing
-* Username: [your_otter_username]
-* Password: [your_otter_password]
-* CA certificate: /etc/ssl/certs/ca-bundle.crt
-* Region: Victoria
-* User domain name: Default
-* Project domain name: default
-* Cloud type: openstack
+    * Cloud name: otter-container
+    * URL: https://otter.heprc.uvic.ca:15000/v3
+    * Project: testing
+    * Username: [your_otter_username]
+    * Password: [your_otter_password]
+    * CA certificate: /etc/ssl/certs/ca-bundle.crt
+    * Region: Victoria
+    * User domain name: Default
+    * Project domain name: default
+    * Cloud type: openstack
 
-Press 'Add Cloud', then refresh the page. Two new rows should appear with a grey background named "Cores" and "RAM". Set these to:
+    Press 'Add Cloud', then refresh the page. Two new rows should appear with a grey background named "Cores" and "RAM". Set these to:
 
-Cores: 5 / 20
-RAM: 20000 / 51200
+    Cores: 5 / 20
+    RAM: 20000 / 51200
 
-Now, press to the "Defaults" tab at the top of the page (between "Clouds" and "Images"), and add the following info:
+    Now, press to the "Defaults" tab at the top of the page (between "Clouds" and "Images"), and add the following info:
 
-VM Flavour: s1
-VM Image: cernvm3-micro-3.0-6.hdd
-VM Network: glint_net
+    VM Flavour: s1
+    VM Image: cernvm3-micro-3.0-6.hdd
+    VM Network: glint_net
 
-and click "Update Group". The otter cloud should now be ready to launch VMs to run condor jobs.
+    and click "Update Group". The otter cloud should now be ready to launch VMs to run condor jobs.
 
 5. Launch a test job from htc-dev.
 
@@ -180,6 +180,7 @@ and click "Update Group". The otter cloud should now be ready to launch VMs to r
     $ docker push danikam/csv2_private_web
     ~~~~
     
-    8. Pull and run the csv2 container image on your own machine
+    
+8. Pull and run the csv2 container image on your own machine
     
     [to be populated further....]
