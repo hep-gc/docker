@@ -73,6 +73,9 @@ RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAy3lHvsJ7lqjYGNxNfzXCh5VbvYalRPH8SK
 RUN mkdir /etc/my.cnf.d
 COPY openstack.cnf /etc/my.cnf.d
 
+# Add custom .bashrc file
+COPY bashrc /root/.bashrc
+
 # Execute supervisord as entrypoint into the container
 CMD ["/usr/bin/supervisord"]
 
