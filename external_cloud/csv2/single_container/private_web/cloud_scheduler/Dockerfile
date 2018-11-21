@@ -14,7 +14,7 @@
 # create the network: docker network create --subnet=172.28.0.0/16 --ip-range=172.28.5.0/24 --driver bridge cs_net
 # build: docker build -t csv2_cont .
 # run (host network): docker run -d --privileged --name csv2_cont_run --network=host csv2_cont
-# run (port forwarding): docker run -d --privileged --hostname="htc-dev.heprc.uvic.ca" --network=cs_net --ip="172.28.5.1" --name csv2_cont_run -p 947:947 -p 80:80 -p 443:443 -p 3306:3306 -p 9618:9618 -p 40000-40500:40000-40500 csv2_cont
+# run (port forwarding): docker run -d --privileged --hostname="csv2_host" --network=cs_net --ip="172.28.5.1" --name csv2_cont_run -p 947:947 -p 80:80 -p 443:443 -p 444:444 -p 3306:3306 -p 9618:9618 -p 40000-40500:40000-40500 csv2_cont
 
 FROM centos:7
 
@@ -50,7 +50,7 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 COPY supervisord.conf /usr/etc/supervisord.conf
 
 # Expose needed ports
-EXPOSE 80 443 3306 947 9618
+EXPOSE 80 443 444 3306 947 9618
 EXPOSE 40000-40500
 
 WORKDIR /jobs
