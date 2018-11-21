@@ -8,9 +8,10 @@ services:
       - "40000-40500:40000-40500"
       - "947:947"
       - "443:443"
+      - "444:444"
       - "3306:3306"
       - "80:80"
-    hostname: htc-dev.heprc.uvic.ca
+    hostname: csv2_host
     privileged: true
     tty: true
     stdin_open: true
