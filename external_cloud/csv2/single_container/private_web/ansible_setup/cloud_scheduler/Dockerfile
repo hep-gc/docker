@@ -26,9 +26,9 @@ RUN yum -y install emacs && yum install -y iproute && yum -y install telnet && y
 # skip heprc yum mirror if unavailable
 #RUN yum-config-manager --save --setopt=heprc.skip_if_unavailable=true
 
-# Install packages needed for ssh and httpd
+# Install packages needed for ssh 
 RUN yum -y update; yum clean all
-RUN yum -y --setopt=tsflags=nodocs install openssh-server httpd python-setuptools && yum clean all
+#RUN yum -y --setopt=tsflags=nodocs install openssh-server httpd python-setuptools && yum clean all
 
 # Install supervisor
 RUN easy_install supervisor

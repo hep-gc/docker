@@ -1,0 +1,26 @@
+FROM danikam/csv2_private_web:latest
+
+USER root
+
+WORKDIR /jobs
+
+ADD add_localhost.sh /jobs
+
+# Install supervisor
+RUN easy_install supervisor
+
+# Add supervisor's configuration file to the container. Note: This config file is referred by supervisord once started inside container
+COPY supervisord.conf /usr/etc/supervisord.conf
+
+# Expose needed ports
+EXPOSE 80 443 444 3306 947 9618
+EXPOSE 40000-40500
+
+ 
+#RUN source /root/.bashrc
+
+#ENTRYPOINT ["/bin/bash", "-c", LINE='172.28.5.1      localhost'; FILE=/etc/hosts; grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"]
+#ENTRYPOINT ["/bin/bash", "-c", "source /root/.bashrc"]"
+
+# Execute supervisord as entrypoint into the container
+CMD ["/usr/bin/supervisord"]
