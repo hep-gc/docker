@@ -16,8 +16,5 @@ COPY supervisord.conf /usr/etc/supervisord.conf
 EXPOSE 80 443 444 3306 947 9618
 EXPOSE 40000-40500
 
-# Replace NETWORK_INTERFACE line in condor_config.local with the current host's IP address
-#RUN /bin/bash -c public_ip=$(curl -s http://whatismyip.akamai.com/); sed -i '/^NETWORK_INTERFACE =/ d' /etc/condor/condor_config.local; LINE="NETWORK_INTERFACE = $public_ip"; FILE=/etc/condor/condor_config.local; grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE" 
-
 # Execute supervisord as entrypoint into the container
 CMD ["/usr/bin/supervisord"]
