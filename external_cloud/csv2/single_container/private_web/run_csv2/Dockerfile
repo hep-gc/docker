@@ -4,7 +4,7 @@ USER root
 
 WORKDIR /jobs
 
-ADD add_localhost.sh /jobs
+ADD init_setup.sh /jobs
 
 # Install supervisor
 RUN easy_install supervisor
@@ -16,11 +16,8 @@ COPY supervisord.conf /usr/etc/supervisord.conf
 EXPOSE 80 443 444 3306 947 9618
 EXPOSE 40000-40500
 
- 
-#RUN source /root/.bashrc
-
-#ENTRYPOINT ["/bin/bash", "-c", LINE='172.28.5.1      localhost'; FILE=/etc/hosts; grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"]
-#ENTRYPOINT ["/bin/bash", "-c", "source /root/.bashrc"]"
+# Replace NETWORK_INTERFACE line in condor_config.local with the current host's IP address
+#RUN /bin/bash -c public_ip=$(curl -s http://whatismyip.akamai.com/); sed -i '/^NETWORK_INTERFACE =/ d' /etc/condor/condor_config.local; LINE="NETWORK_INTERFACE = $public_ip"; FILE=/etc/condor/condor_config.local; grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE" 
 
 # Execute supervisord as entrypoint into the container
 CMD ["/usr/bin/supervisord"]
