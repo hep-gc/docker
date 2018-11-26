@@ -6,6 +6,8 @@ This README describes how to use the code in this directory - along with the csv
 
 ## Pre-requesites
 
+NOTE: The csv2 container will not currently be able to run condor jobs on a mac because [docker for mac currently cannot route external traffic to docker containers](https://docs.docker.com/docker-for-mac/networking/#httphttps-proxy-support).
+
 To successfully pull and run the csv2 container on your host machine, the following pre-requisites are needed:
 
 * Root or sudo access on the host machine
