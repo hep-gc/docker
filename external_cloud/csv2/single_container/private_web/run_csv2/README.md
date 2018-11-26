@@ -47,7 +47,10 @@ To successfully pull and run the csv2 container on your host machine, the follow
   
   It should take ~2-5 minutes for the container to get up and running.
   
-3. Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. The webpage (at least on firefox, and likely others) will come up with a security warning due to the self-signed ssl certificate, and ask if you want to add an exception - add the security exception to continue to the csv2 webpage. You will then be asked to input a username and 
+3. Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. The webpage (at least on firefox, and likely others) will come up with a security warning due to the self-signed ssl certificate, and ask if you want to add an exception - add the security exception to continue to the csv2 webpage. You will then be asked to input a username and password. These are:
+
+Username: csv2_default
+Password: csv2_pass
 
   The container is currently set up to run jobs on the otter testing cloud, but you can add or remove other clouds by pressing the "Clouds" tab at the top left of the csv2 web page, then pressing the "+" button that appears at the top left of the Clouds page.
 
