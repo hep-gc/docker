@@ -10,6 +10,7 @@ To successfully pull and run the csv2 container on your host machine, the follow
 
 * Root or sudo access on the host machine
 * A running [docker](https://runnable.com/docker/install-docker-on-linux) installation and a [docker-compose](https://docs.docker.com/v17.09/compose/install/) installation
+* At least 6GB of RAM allocated to docker containers. On a mac, for example, this can be set in the advanced docker preferences. For linux machines, docker appears to allocate the full system memory by default, so as long as the host VM has well over 6GB of RAM, it should be ok. 
 * The following ports must be open to external IPv4 traffic:
   * 9168 
   * 40000-40500
@@ -17,7 +18,7 @@ To successfully pull and run the csv2 container on your host machine, the follow
   * 80
   * 443, 444
   
-  This can be done on a centos 7 machine, for example, using the following command:
+  These ports are open by default on a mac (because mac doesn't run a firewall by default). The ports can be opened on a centos 7 machine, for example, using the following command:
   ~~~~
   $ firewall-cmd --permanent --add-port=9168/tcp
   $ firewall-cmd --reload
@@ -46,7 +47,9 @@ To successfully pull and run the csv2 container on your host machine, the follow
   
   It should take ~2-5 minutes for the container to get up and running.
   
-3. Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. The container is currently set up to run jobs on the otter testing cloud, but you can add or remove other clouds by pressing the "Clouds" tab at the top left of the csv2 web page, then pressing the "+" button that appears at the top left of the Clouds page.
+3. Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. The webpage (at least on firefox, and likely others) will come up with a security warning due to the self-signed ssl certificate, and ask if you want to add an exception - add the security exception to continue to the csv2 webpage. You will then be asked to input a username and 
+
+  The container is currently set up to run jobs on the otter testing cloud, but you can add or remove other clouds by pressing the "Clouds" tab at the top left of the csv2 web page, then pressing the "+" button that appears at the top left of the Clouds page.
 
 4. Start a bash shell in the running csv2 container and submit a sample job to condor.
 
