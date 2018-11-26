@@ -12,7 +12,7 @@ To successfully create and set up the csv2 container from scratch, the following
 
 * The csv2_default password to access the csv2 website at https://htc-dev.heprc.uvic.ca
 
-* The following ports should be open to external IPv4 traffic:
+* The following ports on htc-dev should be open to external IPv4 traffic:
 
     * 80/tcp
     * 947/tcp
@@ -190,6 +190,4 @@ To successfully create and set up the csv2 container from scratch, the following
     ~~~~
     
     
-8. Pull and run the csv2 container image on your own machine
-    
-    [to be populated further....]
+8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 docker image on another machine.
