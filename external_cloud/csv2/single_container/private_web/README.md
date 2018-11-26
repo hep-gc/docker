@@ -185,7 +185,7 @@ To successfully create and set up the csv2 container from scratch, the following
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
     ~~~~
-    $ docker commit private_web_cloud_scheduler_1_[container id] [your docker hub username]/csv2_private_web
+    $ docker commit ansible_setup_cloud_scheduler_1_[container id] [your docker hub username]/csv2_private_web
     $ docker push danikam/csv2_private_web
     ~~~~
     
