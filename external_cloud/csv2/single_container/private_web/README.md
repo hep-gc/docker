@@ -115,12 +115,10 @@ To successfully create and set up the csv2 container from scratch, the following
     [password: supersecret]
     ~~~~
 
-    switch to the condor user, make a 'logs' directory, and launch a test job, located in the /jobs directory
+    switch to the condor user and launch a test job, located in the /jobs directory
 
     ~~~~
-    $ su condor -s /bin/bash
-    $ cd
-    $ mkdir logs
+    $ su condor
     $ cd /jobs
     $ condor_submit job.sh
     ~~~~
@@ -139,29 +137,7 @@ To successfully create and set up the csv2 container from scratch, the following
     $ condor_q -better-analyze
     ~~~~
 
-6. The test job try.job in the /jobs directory can be run by switching to condor user, and using the condor_submit command:
-
-    ~~~~
-    $ su condor
-    $ cd /jobs
-    $ condor_submit try.job
-    ~~~~
-
-    To switch back to root user, type ctrl-D.
-
-    To check the status of your job in the condor q type:
-
-    ~~~~
-    $ condor_q
-    ~~~~
-
-    For more information, use the better-analyze option
-
-    ~~~~
-    $ condor_q -better-analyze
-    ~~~~
-
-    Note that it may take ~5-10 minutes for the VM to boot and the job to start running.
+    Note that it may take ~5-10 minutes for the VM to boot on otter and the job to start running.
     
 7. Save the running csv2 container as a docker image
 
