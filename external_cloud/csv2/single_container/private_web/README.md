@@ -1,4 +1,4 @@
-# csv2 to Run Jobs on an External Cloud from a Single Container README
+# csv2 to Run Jobs on an External Cloud from a Single Container with private web README
 
 ## Introduction
 
@@ -12,7 +12,7 @@ To successfully create and set up the csv2 container from scratch, the following
 
 * The csv2_default password to access the csv2 website at https://htc-dev.heprc.uvic.ca
 
-* The following ports should be open to external IPv4 traffic:
+* The following ports on htc-dev should be open to external IPv4 traffic:
 
     * 80/tcp
     * 947/tcp
@@ -29,13 +29,14 @@ To successfully create and set up the csv2 container from scratch, the following
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@htc-dev.heprc.uvic.ca
     ~~~~
 
-2. Starting in the current (external_cloud/single_container/private_web) directory, use docker-compose to build and run the cloudscheduler container
+2. Starting in the ansible_setup (external_cloud/single_container/private_web/ansible_setup) directory, use docker-compose to build and run the cloudscheduler container
 
     ~~~~
+    $ cd ansible_setup
     $ docker-compose up&
     ~~~~
     
-3. Run ansible to set up csv2 on the running container
+3. Run ansible from elephant06 to set up csv2 on the running container
 
     ~~~~
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@elephant06.heprc.uvic.ca
@@ -184,11 +185,9 @@ To successfully create and set up the csv2 container from scratch, the following
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
     ~~~~
-    $ docker commit private_web_cloud_scheduler_1_[container id] [your docker hub username]/csv2_private_web
+    $ docker commit ansible_setup_cloud_scheduler_1_[container id] [your docker hub username]/csv2_private_web
     $ docker push danikam/csv2_private_web
     ~~~~
     
     
-8. Pull and run the csv2 container image on your own machine
-    
-    [to be populated further....]
+8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 docker image on another machine.
