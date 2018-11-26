@@ -5,6 +5,7 @@ USER root
 WORKDIR /jobs
 
 ADD init_setup.sh /jobs
+ADD update_defaults.sh /jobs
 
 # Install supervisor
 RUN easy_install supervisor
