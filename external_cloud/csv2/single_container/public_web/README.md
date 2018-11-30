@@ -58,11 +58,18 @@ To successfully set up and run the container, and launch condor jobs from the co
     [enter git heprc credentials]
     ~~~~
 
-    checkout the feature/container branch in the Inventory repo:
+    open the htc-dev-vars.yaml file in ansible-systems/heprc/staticvms/vars. Eg.
 
     ~~~~
-    $ cd Inventory
-    $ git checkout feature/container
+    emacs /home/danikam1/Git/ansible-systems/heprc/staticvms/varsh/htc-dev-vars.yaml
+    ~~~~
+    
+    
+    Make sure the 'container' variable is set to True in htc-dev-vars.yaml, and 'local_web' is set to False:
+    
+    ~~~~
+    container: True
+    local_web: False
     ~~~~
 
     Run ansible on the docker container running on htc-dev:
