@@ -29,7 +29,7 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@htc-dev.heprc.uvic.ca
     ~~~~
 
-2. Starting in the ansible_setup (external_cloud/single_container/private_web/ansible_setup) directory, use docker-compose to build and run the cloudscheduler and condor containers
+2. Starting in the ansible_setup (separated_containers/single_host/ansible_setup) directory, use docker-compose to build and run the cloudscheduler and condor containers
 
     ~~~~
     $ cd ansible_setup
