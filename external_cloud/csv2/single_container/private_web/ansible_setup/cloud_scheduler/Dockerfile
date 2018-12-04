@@ -21,14 +21,14 @@ FROM centos:7
 USER root
 
 # Install useful packages
-RUN yum -y install emacs && yum install -y iproute && yum -y install telnet && yum -y install cronie && yum -y install firewalld && yum -y install net-tools && yum -y install mlocate && yum -y install which && yum -y install sudo
+RUN yum -y install emacs && yum install -y iproute && yum -y install telnet && yum -y install cronie && yum -y install net-tools && yum -y install mlocate && yum -y install which && yum -y install sudo
 
 # skip heprc yum mirror if unavailable
 #RUN yum-config-manager --save --setopt=heprc.skip_if_unavailable=true
 
 # Install packages needed for ssh 
 RUN yum -y update; yum clean all
-#RUN yum -y --setopt=tsflags=nodocs install openssh-server httpd python-setuptools && yum clean all
+RUN yum -y --setopt=tsflags=nodocs install openssh-server httpd python-setuptools && yum clean all
 
 # Install supervisor
 RUN easy_install supervisor
@@ -72,9 +72,6 @@ RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAy3lHvsJ7lqjYGNxNfzXCh5VbvYalRPH8SK
 # Add openstack.cnf to the /etc/my.cnf.d directory for the mysql daemon to work properly
 RUN mkdir /etc/my.cnf.d
 COPY openstack.cnf /etc/my.cnf.d
-
-# Add custom .bashrc file
-COPY bashrc /root/.bashrc
 
 # Execute supervisord as entrypoint into the container
 CMD ["/usr/bin/supervisord"]
