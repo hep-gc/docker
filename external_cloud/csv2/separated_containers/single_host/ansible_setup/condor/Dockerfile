@@ -15,8 +15,14 @@ RUN pip install --upgrade pip && pip install --upgrade setuptools && pip install
 
 #condor installation
 RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
-RUN yum -y install condor
-RUN cp condor_config /etc/condor && systemctl enable condor
+RUN yum -y install condor-all fetch-crl globus-proxy-utils
+RUN systemctl enable condor
+
+COPY condor_config.local /etc/condor/
+COPY default_request defrag gsi ports scaling system_hold /etc/condor/config.d/
+
+# Add NETWORK_INTERFACE line in condor_config.local with the current host's IP address 
+RUN public_ip=$(curl -s http://whatismyip.akamai.com/) && sed -i '/^NETWORK_INTERFACE =/ d' /etc/condor/condor_config.local && LINE="NETWORK_INTERFACE = $public_ip"; FILE=/etc/condor/condor_config.local; grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
 
 # make the condor user accessible
 RUN chsh -s /bin/bash condor
