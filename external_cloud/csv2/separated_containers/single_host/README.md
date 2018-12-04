@@ -167,4 +167,4 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     ~~~~
     
     
-8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 docker image on another machine.
+8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 image on another machine, with condor running on either the same or another machine.
