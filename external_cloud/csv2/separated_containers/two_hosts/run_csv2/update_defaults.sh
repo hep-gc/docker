@@ -9,3 +9,6 @@ cloudscheduler group metadata-delete -mn default.yaml.j2 -Y
 
 # Upload the updated defaults.yaml.j2 file
 cloudscheduler group metadata-load -f /opt/cloudscheduler/default.yaml.j2 -mn default.yaml.j2
+
+# Update the central manager to be the current host computer
+cloudscheduler group update -gn csv2-group -gm $HOSTNAME

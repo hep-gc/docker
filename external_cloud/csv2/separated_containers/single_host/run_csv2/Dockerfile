@@ -1,4 +1,4 @@
-FROM danikam/csv2_private_web:latest
+FROM danikam/csv2_no_condor:latest
 
 USER root
 

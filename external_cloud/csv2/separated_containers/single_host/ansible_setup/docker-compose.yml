@@ -6,7 +6,7 @@ services:
     ports: 
       - "9618:9618"
       - "40000-40500:40000-40500"
-    hostname: $HOSTNAME
+    hostname: $(hostname)
     privileged: true
     tty: true
     stdin_open: true
