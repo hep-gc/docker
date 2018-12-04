@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create a docker CENTOS 7 container which runs both [HTCondor](https://research.cs.wisc.edu/htcondor/description.html) and cloudscheduler version 2 to launch virtual machines (VMs) and run HTCondor jobs on external clusters. Once the csv2 image is created and pushed to the docker hub, the user can pull the image and have a running csv2 container. 
+The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create two docker CENTOS 7 containers, one of which runs [HTCondor](https://research.cs.wisc.edu/htcondor/description.html), and the other runs cloudscheduler version 2 to launch virtual machines (VMs) and run the HTCondor jobs on external clusters. Once the csv2 image is created and pushed to the docker hub, the user can pull the image and have a running csv2 container. 
 
 ## Prerequisites
 
