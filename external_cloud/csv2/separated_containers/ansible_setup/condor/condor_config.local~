@@ -1,7 +1,5 @@
 ##  What machine is your central manager?
-# DMM: set the condor host to the name of the condor service
-CONDOR_HOST = condor
-#CONDOR_HOST = $(FULL_HOSTNAME)
+CONDOR_HOST = $(FULL_HOSTNAME)
 
 ## Pool's short description
 COLLECTOR_NAME = IAAS Production Pool
@@ -9,7 +7,7 @@ COLLECTOR_NAME = IAAS Production Pool
 #DAEMON_LIST = $(DAEMON_LIST), COLLECTOR, NEGOTIATOR
 DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD
 
-##  When is this machine willing to start a job?
+##  When is this machine willing to start a job? 
 START = TRUE
 SUSPEND = FALSE
 PREEMPT = FALSE
@@ -20,16 +18,9 @@ TRUST_UID_DOMAIN = TRUE
 
 #ALL_DEBUG  = D_HOSTNAME
 
-#SPOOL          = /storage/condor/spool
-#EXECUTE                = /storage/condor/execute
+#SPOOL		= /storage/condor/spool
+#EXECUTE		= /storage/condor/execute
 #DELEGATE_JOB_GSI_CREDENTIALS_LIFETIME = 0
-
-# Limit the port range for container work
-LOWPORT = 40000
-HIGHPORT = 40500
-
-# Need to specify the network interface (public IP) for container work
-NETWORK_INTERFACE = 206.12.97.182
 
 ALLOW_READ = *
 ALLOW_WRITE = *
@@ -38,3 +29,15 @@ ALLOW_WRITE = *
 #FLOCK_COLLECTOR_HOSTS = $(FLOCK_TO)
 #FLOCK_NEGOTIATOR_HOSTS = $(FLOCK_TO)
 #HOSTALLOW_NEGOTIATOR_SCHEDD = $(COLLECTOR_HOST), $(FLOCK_NEGOTIATOR_HOSTS)
+
+# Additional settings needed for container work
+LOWPORT = 40000
+HIGHPORT = 40500
+ENABLE_SOAP = FALSE
+COLLECTOR_SOCKET_CACHE_SIZE=10000
+COLLECTOR.MAX_FILE_DESCRIPTORS = 10000
+ALLOW_NEGOTIATOR = *
+ALLOW_NEGOTIATOR_SCHEDD = *
+
+# Needed for a container as it doesn't have sys admin capabilities
+DISCARD_SESSION_KEYRING_ON_STARTUP = FALSE
