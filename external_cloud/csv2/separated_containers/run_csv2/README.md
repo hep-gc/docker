@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This README describes how to use the code in this directory - along with the csv2 container produced using the code in ../ansible_setup as described in the README in the private_web directory (one directory up from here) - to pull and run a container running csv2 on your host machine.
+This README describes how to use the code in this directory - along with the csv2 container produced using the code in ../ansible_setup as described in the README in the separated_containers directory (one directory up from here) - to pull and run a container running csv2 on your host machine, and run a condor container on either the same or another machine that submits jobs to the csv2 container.
 
 ## Pre-requesites
 
@@ -14,8 +14,6 @@ To successfully pull and run the csv2 container on your host machine, the follow
 * A running [docker](https://runnable.com/docker/install-docker-on-linux) installation and a [docker-compose](https://docs.docker.com/v17.09/compose/install/) installation
 * At least 6GB of RAM allocated to docker containers. On a mac, for example, this can be set in the advanced docker preferences. For linux machines, docker appears to allocate the full system memory by default, so as long as the host VM has well over 6GB of RAM, it should be ok. 
 * The following ports must be open to external IPv4 traffic:
-  * 9168 
-  * 40000-40500
   * 3306
   * 80
   * 443, 444
@@ -28,6 +26,11 @@ To successfully pull and run the csv2 container on your host machine, the follow
   and repeating for the other ports and port ranges.
   
 * Access to a web browser to view the csv2 webpage
+  
+To successfully run the condor container, the machine on which it will run should have the following ports open to external IPv4 traffic:
+
+  * 9168 
+  * 40000-40500
 
 ## Pulling and running the csv2 container
 
