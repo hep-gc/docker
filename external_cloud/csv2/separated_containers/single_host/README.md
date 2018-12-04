@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create a docker CENTOS 7 container which runs both [HTCondor](https://research.cs.wisc.edu/htcondor/description.html) and cloudscheduler version 2 to launch virtual machines (VMs) and run HTCondor jobs on external clusters. Once the csv2 image is created and pushed to the docker hub, the user can pull the image and have a running csv2 container. 
+The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create two docker CENTOS 7 containers, one of which runs [HTCondor](https://research.cs.wisc.edu/htcondor/description.html), and the other runs cloudscheduler version 2 to launch virtual machines (VMs) and run the HTCondor jobs on external clusters. Once the csv2 image is created and pushed to the docker hub, the user can pull the image and have a running csv2 container. 
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@htc-dev.heprc.uvic.ca
     ~~~~
 
-2. Starting in the ansible_setup (external_cloud/single_container/private_web/ansible_setup) directory, use docker-compose to build and run the cloudscheduler and condor containers
+2. Starting in the ansible_setup (separated_containers/single_host/ansible_setup) directory, use docker-compose to build and run the cloudscheduler and condor containers
 
     ~~~~
     $ cd ansible_setup
@@ -157,7 +157,7 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     $ docker ps -a
     ~~~~
 
-    The name of the running container is listed in the last column ("NAMES"). 
+    The name of the container is listed in the last column ("NAMES"). 
 
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
@@ -167,4 +167,4 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     ~~~~
     
     
-8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 docker image on another machine.
+8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 image on another machine, with condor running on either the same or another machine.

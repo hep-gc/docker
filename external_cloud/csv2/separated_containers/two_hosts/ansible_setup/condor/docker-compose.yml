@@ -1,7 +1,7 @@
 version: "2"
 services:
   condor:
-    build: condor
+    build: .
     image: condor
     ports: 
       - "9618:9618"
@@ -13,7 +13,6 @@ services:
     networks:
       cs_net:
         ipv4_address: 172.28.5.2        
-    mem_limit: 5M
 
 networks:
   cs_net:
