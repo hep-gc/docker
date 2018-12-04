@@ -157,7 +157,7 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     $ docker ps -a
     ~~~~
 
-    The name of the running container is listed in the last column ("NAMES"). 
+    The name of the container is listed in the last column ("NAMES"). 
 
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
