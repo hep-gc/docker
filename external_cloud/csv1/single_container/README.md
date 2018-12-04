@@ -87,7 +87,7 @@ To successfully launch VMs on external clusters from your machine, the following
     If any of the files in /etc/cloudscheduler are updated, cloudscheduler needs to be restarted for the changes to take effect:
 
     ~~~~
-    $ /etc/init.d/cloudscheduler quickrestart
+    $ /etc/init.d/cloud_scheduler quickrestart
     ~~~~
 
     After restarting cloudscheduler, clouds will need to be disabled or re-enabled using cloud_admin to get to the original settings. For example, to get back to the default setting of having only otter-container enabled:
