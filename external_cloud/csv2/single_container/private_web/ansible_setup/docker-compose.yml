@@ -12,6 +12,9 @@ services:
       - "3306:3306"
       - "80:80"
     hostname: csv2_host
+    # DMM: Temporary fix for condor schedd name until csv2 is updated
+    extra_hosts:
+     - "$HOSTNAME csv2_host:172.28.5.2"
     privileged: true
     tty: true
     stdin_open: true
