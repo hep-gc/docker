@@ -6,14 +6,13 @@ services:
     ports: 
       - "9618:9618"
       - "40000-40500:40000-40500"
-    hostname: $(hostname)
+    hostname: $HOSTNAME
     privileged: true
     tty: true
     stdin_open: true
     networks:
       cs_net:
-        ipv4_address: 172.28.5.2        
-    mem_limit: 5M
+        ipv4_address: 172.28.5.2
 
   cloud_scheduler:
     build: cloud_scheduler
@@ -31,7 +30,6 @@ services:
     networks:
       cs_net:
         ipv4_address: 172.28.5.1
-    mem_limit: 10M
 
 networks:
   cs_net:
