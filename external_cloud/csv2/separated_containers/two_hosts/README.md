@@ -1,8 +1,8 @@
-# csv2 to Run Jobs on an External Cloud from a Single Container with private web README
+# csv2 to Run Jobs on an External Cloud from a Container, with Condor Running in a Container on a Separate Host README
 
 ## Introduction
 
-The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create a docker CENTOS 7 container which runs both [HTCondor](https://research.cs.wisc.edu/htcondor/description.html) and cloudscheduler version 2 to launch virtual machines (VMs) and run HTCondor jobs on external clusters. Once the csv2 image is created and pushe to the docker hub, (hopefully...) any user will be able to pull the image and have a running csv2 container. 
+The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create two docker CENTOS 7 containers, one of which runs [HTCondor](https://research.cs.wisc.edu/htcondor/description.html) on one host, and the other runs cloudscheduler version 2 on another host to launch virtual machines (VMs) and run HTCondor jobs on external clusters. Once the csv2 image is created and pushed to the docker hub, a user can pull the image and have a running csv2 container, which communicates with the remote condor container. 
 
 ## Prerequisites
 
@@ -18,10 +18,14 @@ To successfully create and set up the csv2 container from scratch, the following
     * 947/tcp
     * 3306/tcp
     * 443/tcp
+    
+* The following ports should be open to external IPv4 traffic on the machine running condor:
     * 9618/tcp
     * 40000-40500/tcp
 
 ## Instructions
+
+NOTE: Currently, the csv2 container should be identical to the one created in ../single_host, so if there is an up-to-date image of this container, it should be fine to work with this, in which case you can directly proceed with the instructions in the run_csv2 directory. Otherwise, proceed with the setup as described below.
 
 1. ssh onto the htc-dev computer:
 
@@ -29,7 +33,7 @@ To successfully create and set up the csv2 container from scratch, the following
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@htc-dev.heprc.uvic.ca
     ~~~~
 
-2. Starting in the ansible_setup (external_cloud/single_container/private_web/ansible_setup) directory, use docker-compose to build and run the cloudscheduler container
+2. Starting in the cloud_scheduler (ansible_setup/cloud_scheduler) directory, use docker-compose to build and run the cloudscheduler container
 
     ~~~~
     $ cd ansible_setup
@@ -59,11 +63,12 @@ To successfully create and set up the csv2 container from scratch, the following
     emacs /home/danikam1/Git/ansible-systems/heprc/staticvms/varsh/htc-dev-vars.yaml
     ~~~~
 
-    Make sure the 'container' and 'local_web' variables are both set to True in htc-dev-vars.yaml:
+    Make sure the 'container' and 'local_web' variables are both set to True in htc-dev-vars.yaml, and 'running_condor' is set to False:
     
     ~~~~
     container: True
     local_web: True
+    running_condor: False
     ~~~~
     
     Run ansible on the docker container running on htc-dev. Eg.
