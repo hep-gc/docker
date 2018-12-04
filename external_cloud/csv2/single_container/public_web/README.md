@@ -65,11 +65,12 @@ To successfully set up and run the container, and launch condor jobs from the co
     ~~~~
     
     
-    Make sure the 'container' variable is set to True in htc-dev-vars.yaml, and 'local_web' is set to False:
+    Make sure the 'container' variable is set to True in htc-dev-vars.yaml, 'local_web' is set to False, and running_condor is set to True:
     
     ~~~~
     container: True
     local_web: False
+    running_condor: True
     ~~~~
 
     Run ansible on the docker container running on htc-dev:
