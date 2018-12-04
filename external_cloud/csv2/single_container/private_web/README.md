@@ -59,11 +59,12 @@ To successfully create and set up the csv2 container from scratch, the following
     emacs /home/danikam1/Git/ansible-systems/heprc/staticvms/varsh/htc-dev-vars.yaml
     ~~~~
 
-    Make sure the 'container' and 'local_web' variables are both set to True in htc-dev-vars.yaml:
+    Make sure the 'container', 'local_web', and 'running_condor' variables are all set to True in htc-dev-vars.yaml:
     
     ~~~~
     container: True
     local_web: True
+    running_condor: True
     ~~~~
     
     Run ansible on the docker container running on htc-dev. Eg.
