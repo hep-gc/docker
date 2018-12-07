@@ -6,7 +6,7 @@
 # start condor
 /usr/bin/systemctl start condor
 
-# start cloudscheduler, disable container-cloud, and enable cc-west cloud
+# start cloudscheduler, disable container-cloud, and enable otter-container cloud
 /etc/init.d/cloud_scheduler start
 
 # sleep for 2s while cloud scheduler starts
