@@ -1,12 +1,12 @@
-# csv2 to Run Jobs on an External Cloud from a Container, with Condor Running in a Container on a Separate Host README
+# csv2 to Run Jobs on an External Cloud from Separate csv2 and Condor containers with Private Web README
 
 ## Introduction
 
-The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create two docker CENTOS 7 containers, one of which runs [HTCondor](https://research.cs.wisc.edu/htcondor/description.html) on one host, and the other runs cloudscheduler version 2 on another host to launch virtual machines (VMs) and run HTCondor jobs on external clusters. Once the csv2 image is created and pushed to the docker hub, a user can pull the image and have a running csv2 container, which communicates with the remote condor container. 
+The files in this directory currently enable a user with access to both the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca computers to create two docker CENTOS 7 containers, one of which runs [HTCondor](https://research.cs.wisc.edu/htcondor/description.html), and the other runs cloudscheduler version 2 to launch virtual machines (VMs) and run the HTCondor jobs on external clusters. Once the csv2 image is created and pushed to the docker hub, the user can pull the image and have a running csv2 container, which communicates with a container running condor on either the same or another machine. 
 
 ## Prerequisites
 
-To successfully create and set up the csv2 container from scratch, the following pre-requisites are needed:
+To successfully create and set up the csv2 and condor containers from scratch, the following pre-requisites are needed:
 
 * Root access to the elephant06.heprc.uvic.ca and htc-dev.heprc.uvic.ca VMs
 
@@ -18,14 +18,10 @@ To successfully create and set up the csv2 container from scratch, the following
     * 947/tcp
     * 3306/tcp
     * 443/tcp
-    
-* The following ports should be open to external IPv4 traffic on the machine running condor:
     * 9618/tcp
     * 40000-40500/tcp
 
 ## Instructions
-
-NOTE: Currently, the csv2 container should be identical to the one created in ../single_host, so if there is an up-to-date image of this container, it should be fine to work with this, in which case you can directly proceed with the instructions in the run_csv2 directory. Otherwise, proceed with the setup as described below.
 
 1. ssh onto the htc-dev computer:
 
@@ -33,14 +29,14 @@ NOTE: Currently, the csv2 container should be identical to the one created in ..
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@htc-dev.heprc.uvic.ca
     ~~~~
 
-2. Starting in the cloud_scheduler (ansible_setup/cloud_scheduler) directory, use docker-compose to build and run the cloudscheduler container
+2. Starting in the ansible_setup (separated_containers/single_host/ansible_setup) directory, use docker-compose to build and run the cloudscheduler and condor containers
 
     ~~~~
     $ cd ansible_setup
     $ docker-compose up&
     ~~~~
     
-3. Run ansible from elephant06 to set up csv2 on the running container
+3. Run ansible from elephant06 to set up csv2 on the running cloudscheduler container
 
     ~~~~
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@elephant06.heprc.uvic.ca
@@ -63,7 +59,7 @@ NOTE: Currently, the csv2 container should be identical to the one created in ..
     emacs /home/danikam1/Git/ansible-systems/heprc/staticvms/varsh/htc-dev-vars.yaml
     ~~~~
 
-    Make sure the 'container' and 'local_web' variables are both set to True in htc-dev-vars.yaml, and 'running_condor' is set to False:
+    Make sure the 'container' and 'local_web' variables are both set to True in htc-dev-vars.yaml, and the running_condor variable is set to False:
     
     ~~~~
     container: True
@@ -161,14 +157,14 @@ NOTE: Currently, the csv2 container should be identical to the one created in ..
     $ docker ps -a
     ~~~~
 
-    The name of the running container is listed in the last column ("NAMES"). 
+    The name of the container is listed in the last column ("NAMES"). 
 
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
     ~~~~
-    $ docker commit ansible_setup_cloud_scheduler_1_[container id] [your docker hub username]/csv2_private_web
-    $ docker push danikam/csv2_private_web
+    $ docker commit ansible_setup_cloud_scheduler_1_[container id] [your docker hub username]/csv2_separate_condor
+    $ docker push danikam/csv2_separate_condor
     ~~~~
     
     
-8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 docker image on another machine.
+8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 image on another machine, with condor running on either the same or another machine.
