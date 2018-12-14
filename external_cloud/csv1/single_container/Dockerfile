@@ -31,7 +31,10 @@ RUN cp /jobs/cloud-scheduler-dev/scripts/cloud_scheduler.init.d /etc/init.d/clou
 RUN cd /srv && mkdir userdata && cp /jobs/benchmark.yaml /srv/userdata/ && cp /jobs/verifycs.yaml /srv/userdata/
 
 #configure ssh keys
-RUN ssh-keygen -q -f /root/.ssh/id_rsa -N "" && python generate-keyfile.py && cp auth-key.yaml /etc/cloudscheduler/auth-key.yaml 
+RUN ssh-keygen -q -f /root/.ssh/id_rsa -N "" && python generate-keyfile.py && cp auth-key.yaml /etc/cloudscheduler/auth-key.yaml
+
+# copy the custom qemu.conf file to /etc/libvirt/ 
+RUN cp qemu.conf /etc/libvirt/qemu.conf
 
 #make the directories for local images
 RUN mkdir -p /jobs/instances/base 

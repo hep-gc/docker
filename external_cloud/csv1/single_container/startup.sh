@@ -3,6 +3,9 @@
 # start libvirtd
 /usr/bin/systemctl start libvirtd
 
+# start virtlogd
+/usr/bin/systemctl start libvirtd
+
 # start condor
 /usr/bin/systemctl start condor
 
