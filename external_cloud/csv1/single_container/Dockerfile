@@ -2,7 +2,7 @@ FROM centos:7
 
 USER root
 
-RUN yum -y install virt-install && yum install -y openssh && yum -y install wget && yum -y install unzip && yum -y install gcc && yum -y install python-devel && yum -y install net-tools && yum -y install less && yum -y install libvirt && yum -y install qemu-kvm && yum -y install libvirt-devel && yum -y install mkisofs && yum -y install emacs && yum -y install sudo && yum -y install mlocate && yum -y install git
+RUN yum -y install virt-install && yum install -y openssh && yum -y install wget && yum -y install unzip && yum -y install gcc && yum -y install python-devel && yum -y install net-tools && yum -y install less && yum -y install libvirt && yum -y install qemu-kvm && yum -y install libvirt-devel && yum -y install mkisofs && yum -y install emacs && yum -y install sudo && yum -y install mlocate && yum -y install git && yum -y install libguestfs-tools
 
 WORKDIR /jobs
 ADD . /jobs
@@ -35,6 +35,9 @@ RUN ssh-keygen -q -f /root/.ssh/id_rsa -N "" && python generate-keyfile.py && cp
 
 # copy the custom qemu.conf file to /etc/libvirt/ 
 RUN cp qemu.conf /etc/libvirt/qemu.conf
+
+# copy custom localcluster.py
+RUN cp localcluster.py /usr/lib/python2.7/site-packages/cloud_scheduler-1.13.2-py2.7.egg/cloudscheduler
 
 #make the directories for local images
 RUN mkdir -p /jobs/instances/base 
