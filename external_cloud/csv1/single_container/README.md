@@ -104,7 +104,9 @@ To successfully launch VMs on external clusters from your machine, the following
     * Enable the container-cloud cloud:
   
     ~~~~
-    $ cloud_admin -d 
+    $ cloud_admin -d cc-west-a
+    $ cloud_admin -d otter-container
+    $ cloud_admin -e container-cloud
     ~~~~
 
     * Get a Centos-7 generic cloud image:
