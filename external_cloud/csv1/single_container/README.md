@@ -99,7 +99,9 @@ To successfully launch VMs on external clusters from your machine, the following
 
 6. If you want to set up the container to run jobs locally, the following steps are needed:
 
-    ** NOTE: The steps in this section are NOT needed if you want to run jobs on an external cloud. If that is the case, skip to step 7.
+    ** NOTE 1: The steps in this section are NOT needed if you want to run jobs on an external cloud. If that is the case, skip to step 7.
+    
+    ** NOTE 2: There is some minimum system RAM required to start VMs. Testing done so far has shown that 3.7GB is insufficient to start VMs, but 5GB is sufficient.
 
     * If needed, enable the container-cloud cloud and disable the other two:
   
