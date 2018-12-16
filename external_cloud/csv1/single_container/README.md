@@ -101,7 +101,7 @@ To successfully launch VMs on external clusters from your machine, the following
 
     ** NOTE: The steps in this section are NOT needed if you want to run jobs on an external cloud. If that is the case, skip to step 7.
 
-    * Enable the container-cloud cloud:
+    * If needed, enable the container-cloud cloud and disable the other two:
   
     ~~~~
     $ cloud_admin -d cc-west-a
