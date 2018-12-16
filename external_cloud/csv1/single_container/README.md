@@ -97,8 +97,98 @@ To successfully launch VMs on external clusters from your machine, the following
     $ cloud_admin -e otter-container
     ~~~~
 
+6. If you want to set up the container to run jobs locally, the following steps are needed:
 
-6. The test job try.job in the /jobs directory can be run by switching to condor user, and using the condor_submit command:
+    ** NOTE 1: The steps in this section are NOT needed if you want to run jobs on an external cloud. If that is the case, skip to step 7.
+    
+    ** NOTE 2: There is some minimum system RAM required to start VMs. Testing done so far has shown that 3.7GB is insufficient to start VMs, but 5GB is sufficient.
+
+    * If needed, enable the container-cloud cloud and disable the other two:
+  
+    ~~~~
+    $ cloud_admin -d cc-west-a
+    $ cloud_admin -d otter-container
+    $ cloud_admin -e container-cloud
+    ~~~~
+
+    * Get a Centos-7 generic cloud image:
+  
+    ~~~~
+    $ cd /jobs/instances/base/
+    $ wget https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1711.qcow2.xz
+    $ xz -d CentOS-7-x86_64-GenericCloud-1711.qcow2.xz
+    ~~~~
+
+    * Inject your public ssh key into the Centos 7 image
+  
+    ~~~~
+    $ virt-customize -a CentOS-7-x86_64-GenericCloud-1711.qcow2 --install epel-release --ssh-inject root:string:"$(cat /root/.ssh/id_rsa.pub)"
+    ~~~~
+ 
+    * Submit a local condor job to start a VM
+  
+    ~~~~
+    $ cd /jobs
+    $ su condor
+    $ condor_submit try_local.job
+    ~~~~
+ 
+    After ~5 minutes (depending on your internet speed and RAM), you should be able to ssh into the VM. Check the IP address using the following command:
+  
+    ~~~~
+    $ virsh net-dhcp-leases default
+    ~~~~
+ 
+    If multiple IP addresses are shown, you can find the one corresponding to your launched VM by checking the MAC address of your launched VM. First, find the name of the VM by typing:
+ 
+    ~~~~
+    $ virsh list
+    ~~~~
+ 
+    The VM name should be container-cloud-(...). Now, find the MAC address by typing:
+ 
+    ~~~~
+    $ virsh domiflist [VM name]
+    ~~~~
+ 
+    * ssh into the vm using the IP address found in the last step, and install condor
+ 
+    ~~~~
+    $ ssh [VM IP address]
+    $ yum -y install wget
+    $ cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
+    $ yum -y install condor
+    ~~~~
+ 
+   Once condor is installed, you can exit out of the VM by typing ctrl-D, then suspend the VM and copy the qcow2 image to the instances/base directory so it is visible to cloudscheduler. Rename it to something like Centos7-Condor.qcow2.
+ 
+    ~~~~
+    $ virsh suspend
+    $ cp /jobs/instances/CentOS-7-x86_64-GenericCloud-1711-[VM name].qcow2 base/Centos7-Condor.qcow2
+    ~~~~
+  
+    You can now kill the suspended VM and cancel the condor job:
+  
+    ~~~~
+    $ cloud_admin -c container-cloud -a -k
+    $ condor_rm [job ID]
+    ~~~~
+  
+    where the condor job ID can be checked by typing:
+  
+    ~~~~
+    $ condor_q
+    ~~~~
+ 
+    Now, change the name of the VM in try_local.job:
+ 
+    ~~~~
+    +VMAMI = "CentOS-7-x86_64-GenericCloud-1711.qcow2" --> +VMAMI = "Centos7-Condor.qcow2"
+    ~~~~
+ 
+    The localhost cloud should now be set up to run the test job try_local.job.
+  
+7. The test job try.job in the /jobs directory can be run by switching to condor user, and using the condor_submit command:
 
     ~~~~
     $ su condor
