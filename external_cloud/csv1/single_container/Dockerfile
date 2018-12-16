@@ -36,9 +36,6 @@ RUN ssh-keygen -q -f /root/.ssh/id_rsa -N "" && python generate-keyfile.py && cp
 # copy the custom qemu.conf file to /etc/libvirt/ 
 RUN cp qemu.conf /etc/libvirt/qemu.conf
 
-# copy custom localcluster.py
-RUN cp localcluster.py /usr/lib/python2.7/site-packages/cloud_scheduler-1.13.2-py2.7.egg/cloudscheduler
-
 #make the directories for local images
 RUN mkdir -p /jobs/instances/base 
 
