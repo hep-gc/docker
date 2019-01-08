@@ -7,9 +7,6 @@ services:
       - "9618:9618"
       - "40000-40500:40000-40500"
     hostname: condor_host
-    # DMM: Temporary fix for condor schedd name until csv2 is updated
-    extra_hosts:
-     - "$HOSTNAME condor_host:172.28.5.2"
     privileged: true
     tty: true
     stdin_open: true
