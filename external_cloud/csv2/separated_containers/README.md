@@ -156,9 +156,10 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
     ~~~~
-    $ docker commit ansible_setup_cloud_scheduler_1 [your docker hub username]/csv2_separate_condor
-    $ docker push [your docker hub username]/csv2_separate_condor
+    $ docker commit ansible_setup_cloud_scheduler_1 [your docker hub username]/csv2_separate_condor:[some unique tag if desired]
+    $ docker push [your docker hub username]/csv2_separate_condor:[some unique tag if desired]
     ~~~~
     
+    Note that if you don't include a unique tag, the container pushed to docker hub will overwrite any existing container with the same tag. If the tag isn't specified, it defaults to 'latest'.
     
 8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 image on another machine, with condor running on either the same or another machine.
