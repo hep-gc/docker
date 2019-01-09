@@ -39,9 +39,11 @@ To successfully pull and run the csv2 container on your host machine, the follow
   $ docker pull danikam/csv2_private_web
   ~~~~
   
-  This pull should take ~5-15 minutes depending on your internet speed.
+  This pull should take ~5-15 minutes depending on your internet speed. If you've saved the container image to your own repo, pull that image instead.
   
-2. Start up the csv2 container using docker-compose. Note: the docker-compose command must be run from this directory (i.e. the directory containing the docker-compose.yml file):
+2. Start up the csv2 container using docker-compose. Note: the docker-compose command must be run from this directory (i.e. the directory containing the docker-compose.yml file). 
+
+  If you pulled the container image from another repo, you'll need to update the first line of the Dockerfile to use the correct image name. The csv2 container can then be started using:
 
   ~~~~
   $ docker-compose up&
