@@ -72,8 +72,6 @@ Password: csv2_pass
   $ docker ps
   ~~~~
   
-  
-  
   Use the following command to start an interactive bash shell in the csv2 container:
   
   ~~~~
@@ -83,7 +81,7 @@ Password: csv2_pass
   Once in the container, switch to the condor user to submit the sample job job.sh in the /jobs directory:
   
   ~~~~
-  $ su condor
+  $ su csv2_default
   $ cd /jobs
   $ condor_submit job.sh
   ~~~~
