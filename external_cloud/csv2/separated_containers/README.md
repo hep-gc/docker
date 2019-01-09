@@ -12,7 +12,7 @@ To successfully create and set up the csv2 and condor containers from scratch, t
 
 * The csv2_default password to access the csv2 website at https://htc-dev.heprc.uvic.ca
 
-* The following ports on htc-dev should be open to external IPv4 traffic:
+* The following ports on htc-dev should be open to external IPv4 traffic and not in use:
 
     * 80/tcp
     * 947/tcp
