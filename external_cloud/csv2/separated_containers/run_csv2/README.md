@@ -44,11 +44,11 @@ To successfully run the condor container, the machine on which it will run shoul
   
   This pull should take ~5-15 minutes depending on your internet speed.
   
-  If you saved the container to your own docker hub account, pull that image instead. 
+  If you saved the container to your own repo, or want to pull with a specific tag (eg. danikam/csv2_private_web:190109), pull that image instead. 
   
 2. Start up the csv2 container using docker-compose. Note: the docker-compose command must be run from the cloud_scheduler directory (i.e. the directory containing the docker-compose.yml file for csv2).
 
-If you pulled the container image from another repo, you'll need to update the first line of the Dockerfile to use the correct image name. The csv2 container can then be started using:
+If you pulled the container image from another repo, or used a specific tag, you'll need to update the first line of the Dockerfile to use the correct image name and tag. The csv2 container can then be started using:
 
   ~~~~
   $ docker-compose up&
