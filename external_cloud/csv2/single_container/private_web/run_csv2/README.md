@@ -49,7 +49,9 @@ To successfully pull and run the csv2 container on your host machine, the follow
   
   It should take ~2-5 minutes for the container to get up and running.
   
-3. Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. Alternatively (if the container is running on a remote machine), you can access the browser from a local machine using port forwarding as follows: open a port on the machine running the container (e.g. 1234), then create an ssh tunnel as follows:
+3. Access the csv2 web interface with your web browser.
+
+Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. Alternatively (if the container is running on a remote machine), you can access the browser from a local machine using port forwarding as follows: open a port on the machine running the container (e.g. 1234), then create an ssh tunnel as follows:
 
 ~~~~
 $ ssh -L 1234:localhost:443 root@[IP or FQDN of machine running container]
@@ -63,8 +65,12 @@ Username: csv2_default
 Password: csv2_pass
 
   The container is currently set up to run jobs on the otter testing cloud, but you can add or remove other clouds by pressing the "Clouds" tab at the top left of the csv2 web page, then pressing the "+" button that appears at the top left of the Clouds page.
+  
+4. Update the condor_fqdn variable for your machine.
 
-4. Start a bash shell in the running csv2 container and submit a sample job to condor.
+Navigate to the Defaults menu on the csv2 web interface, and replace the condor_fqdn variable with either the public IP address or the fully-qualified domain name of the machine that the csv2 container is running on.
+
+5. Start a bash shell in the running csv2 container and submit a sample job to condor.
 
   First, determine the name of the running csv2 container by typing:
   
