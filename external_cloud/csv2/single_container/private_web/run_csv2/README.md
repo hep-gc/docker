@@ -13,7 +13,7 @@ To successfully pull and run the csv2 container on your host machine, the follow
 * Root or sudo access on the host machine
 * A running [docker](https://runnable.com/docker/install-docker-on-linux) installation and a [docker-compose](https://docs.docker.com/v17.09/compose/install/) installation
 * At least 6GB of RAM allocated to docker containers. On a mac, for example, this can be set in the advanced docker preferences. For linux machines, docker appears to allocate the full system memory by default, so as long as the host VM has well over 6GB of RAM, it should be ok. 
-* The following ports must be open to external IPv4 traffic:
+* The following ports must be open to external IPv4 traffic and not in use:
   * 9168 
   * 40000-40500
   * 3306
