@@ -36,7 +36,7 @@ To successfully run the condor container, the machine on which it will run shoul
 
 1. Pull the csv2 docker image from github:
 
-   If you created your own image following the instructions in the private_web README (one directory up from here), pull the image from your docker hub account:
+   If you created your own image following the instructions in the private_web README (one directory up from here), pull the image from the docker hub account:
 
   ~~~~
   $ docker pull danikam/csv2_separate_condor
@@ -44,7 +44,11 @@ To successfully run the condor container, the machine on which it will run shoul
   
   This pull should take ~5-15 minutes depending on your internet speed.
   
-2. Start up the csv2 container using docker-compose. Note: the docker-compose command must be run from the cloud_scheduler directory (i.e. the directory containing the docker-compose.yml file for csv2):
+  If you saved the container to your own docker hub account, pull that image instead. 
+  
+2. Start up the csv2 container using docker-compose. Note: the docker-compose command must be run from the cloud_scheduler directory (i.e. the directory containing the docker-compose.yml file for csv2).
+
+If you pulled the container image from another repo, you'll need to update the first line of the Dockerfile to use the correct image name. The csv2 container can then be started using:
 
   ~~~~
   $ docker-compose up&
