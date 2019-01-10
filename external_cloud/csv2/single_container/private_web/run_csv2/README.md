@@ -35,9 +35,9 @@ To successfully pull and run the csv2 container on your host machine, the follow
 
    If needed, log in to your docker hub account:
    
-   ~~~~
-   $ docker login --username=[your docker hub username]
-   ~~~~
+  ~~~~
+  $ docker login --username=[your docker hub username]
+  ~~~~
 
    If you created your own image following the instructions in the private_web README (one directory up from here), pull the image from your docker hub account:
 
