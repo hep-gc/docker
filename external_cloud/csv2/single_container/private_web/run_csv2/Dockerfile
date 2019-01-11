@@ -1,11 +1,10 @@
-FROM danikam/csv2_private_web:latest
+FROM danikam/csv2_private_web:190110
 
 USER root
 
 WORKDIR /jobs
 
 ADD init_setup.sh /jobs
-ADD update_defaults.sh /jobs
 
 # Install supervisor
 RUN easy_install supervisor
