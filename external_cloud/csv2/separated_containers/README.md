@@ -12,7 +12,7 @@ To successfully create and set up the csv2 and condor containers from scratch, t
 
 * The csv2_default password to access the csv2 website at https://htc-dev.heprc.uvic.ca
 
-* The following ports on htc-dev should be open to external IPv4 traffic:
+* The following ports on htc-dev should be open to external IPv4 traffic and not in use:
 
     * 80/tcp
     * 947/tcp
@@ -151,20 +151,15 @@ To successfully create and set up the csv2 and condor containers from scratch, t
     $ docker login --username=[your docker hub username]
     ~~~~
     
-    Lastly, commit the docker container to a new image named [your docker hub username]/csv2_private_web, and push it to the docker repo. You will need the full name of the running docker container (private_web_cloud_scheduler_1_[container id]). This can be found by running:
-
-    ~~~~
-    $ docker ps -a
-    ~~~~
-
-    The name of the container is listed in the last column ("NAMES"). 
+    Lastly, commit the docker container to a new image named [your docker hub username]/csv2_private_web, and push it to the docker repo. You will need the full name of the running docker container (ansible_setup_cloud_scheduler_1). 
 
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
     ~~~~
-    $ docker commit ansible_setup_cloud_scheduler_1_[container id] [your docker hub username]/csv2_separate_condor
-    $ docker push danikam/csv2_separate_condor
+    $ docker commit ansible_setup_cloud_scheduler_1 [your docker hub username]/csv2_separate_condor:[some unique tag if desired]
+    $ docker push [your docker hub username]/csv2_separate_condor:[some unique tag if desired]
     ~~~~
     
+    Note that if you don't include a unique tag, the container pushed to docker hub will overwrite any existing container with the same tag. If the tag isn't specified, it defaults to 'latest'.
     
 8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 image on another machine, with condor running on either the same or another machine.

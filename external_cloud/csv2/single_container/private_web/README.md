@@ -56,7 +56,7 @@ To successfully create and set up the csv2 container from scratch, the following
     open the htc-dev-vars.yaml file in ansible-systems/heprc/staticvms/vars. Eg. 
     
     ~~~~
-    emacs /home/danikam1/Git/ansible-systems/heprc/staticvms/varsh/htc-dev-vars.yaml
+    emacs /home/danikam1/Git/ansible-systems/heprc/staticvms/vars/htc-dev-vars.yaml
     ~~~~
 
     Make sure the 'container', 'local_web', and 'running_condor' variables are all set to True in htc-dev-vars.yaml:
@@ -151,20 +151,15 @@ To successfully create and set up the csv2 container from scratch, the following
     $ docker login --username=[your docker hub username]
     ~~~~
     
-    Lastly, commit the docker container to a new image named [your docker hub username]/csv2_private_web, and push it to the docker repo. You will need the full name of the running docker container (private_web_cloud_scheduler_1_[container id]). This can be found by running:
-
-    ~~~~
-    $ docker ps -a
-    ~~~~
-
-    The name of the running container is listed in the last column ("NAMES"). 
+    Lastly, commit the docker container to a new image named [your docker hub username]/csv2_private_web, and push it to the docker repo. You will need the full name of the running docker container (ansible_setup_cloud_scheduler_1).
 
     Run the following commands to commit and push the container to the csv2_private_web repo:    
 
     ~~~~
-    $ docker commit ansible_setup_cloud_scheduler_1_[container id] [your docker hub username]/csv2_private_web
-    $ docker push danikam/csv2_private_web
+    $ docker commit ansible_setup_cloud_scheduler_1 [your docker hub username]/csv2_private_web:[some unique tag if desired]
+    $ docker push [your docker hub username]/csv2_private_web:[some unique tag if desired]
     ~~~~
     
+    Note that if you don't include a unique tag, the container pushed to docker hub will overwrite any existing container with the same tag. If the tag isn't specified, it defaults to 'latest'.
     
 8. Follow the instructions in the run_csv2 directory's README to pull and run the csv2 docker image on another machine.

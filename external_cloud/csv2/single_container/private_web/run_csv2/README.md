@@ -13,7 +13,7 @@ To successfully pull and run the csv2 container on your host machine, the follow
 * Root or sudo access on the host machine
 * A running [docker](https://runnable.com/docker/install-docker-on-linux) installation and a [docker-compose](https://docs.docker.com/v17.09/compose/install/) installation
 * At least 6GB of RAM allocated to docker containers. On a mac, for example, this can be set in the advanced docker preferences. For linux machines, docker appears to allocate the full system memory by default, so as long as the host VM has well over 6GB of RAM, it should be ok. 
-* The following ports must be open to external IPv4 traffic:
+* The following ports must be open to external IPv4 traffic and not in use:
   * 9168 
   * 40000-40500
   * 3306
@@ -33,15 +33,23 @@ To successfully pull and run the csv2 container on your host machine, the follow
 
 1. Pull the csv2 docker image from github:
 
+   If needed, log in to your docker hub account:
+   
+  ~~~~
+  $ docker login --username=[your docker hub username]
+  ~~~~
+
    If you created your own image following the instructions in the private_web README (one directory up from here), pull the image from your docker hub account:
 
   ~~~~
   $ docker pull danikam/csv2_private_web
   ~~~~
   
-  This pull should take ~5-15 minutes depending on your internet speed.
+  This pull should take ~5-15 minutes depending on your internet speed. If you've saved the container image to your own repo, or want to pull with a specific tag (eg. danikam/csv2_private_web:190109), pull that image and tag instead.
   
-2. Start up the csv2 container using docker-compose. Note: the docker-compose command must be run from this directory (i.e. the directory containing the docker-compose.yml file):
+2. Start up the csv2 container using docker-compose. Note: the docker-compose command must be run from this directory (i.e. the directory containing the docker-compose.yml file). 
+
+  If you pulled the container image from another repo, or used a specific tag, you'll need to update the first line of the Dockerfile to use the correct image name and tag. The csv2 container can then be started using:
 
   ~~~~
   $ docker-compose up&
@@ -49,22 +57,34 @@ To successfully pull and run the csv2 container on your host machine, the follow
   
   It should take ~2-5 minutes for the container to get up and running.
   
-3. Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. The webpage (at least on firefox, and likely others) will come up with a security warning due to the self-signed ssl certificate, and ask if you want to add an exception - add the security exception to continue to the csv2 webpage. You will then be asked to input a username and password. These are:
+3. Access the csv2 web interface with your web browser.
+
+Once the container is up and running, you should be able to see the csv2 web interface by typing https://localhost into your local web browser. Alternatively (if the container is running on a remote machine), you can access the browser from a local machine using port forwarding as follows: open a port on the machine running the container (e.g. 1234), then create an ssh tunnel as follows:
+
+~~~~
+$ ssh -L 1234:localhost:443 root@[IP or FQDN of machine running container]
+~~~~
+
+Then open the browser on your local machine and type in https://localhost:1234.
+
+The webpage (at least on firefox, and likely others) will come up with a security warning due to the self-signed ssl certificate, and ask if you want to add an exception - add the security exception to continue to the csv2 webpage. You will then be asked to input a username and password. These are:
 
 Username: csv2_default
 Password: csv2_pass
 
   The container is currently set up to run jobs on the otter testing cloud, but you can add or remove other clouds by pressing the "Clouds" tab at the top left of the csv2 web page, then pressing the "+" button that appears at the top left of the Clouds page.
+  
+4. Update the condor_fqdn variable for your machine.
 
-4. Start a bash shell in the running csv2 container and submit a sample job to condor.
+Navigate to the Defaults menu on the csv2 web interface, and replace the condor_fqdn variable with either the public IP address or the fully-qualified domain name of the machine that the csv2 container is running on.
+
+5. Start a bash shell in the running csv2 container and submit a sample job to condor.
 
   First, determine the name of the running csv2 container by typing:
   
   ~~~~
   $ docker ps
   ~~~~
-  
-  
   
   Use the following command to start an interactive bash shell in the csv2 container:
   
@@ -75,7 +95,7 @@ Password: csv2_pass
   Once in the container, switch to the condor user to submit the sample job job.sh in the /jobs directory:
   
   ~~~~
-  $ su condor
+  $ su csv2_default
   $ cd /jobs
   $ condor_submit job.sh
   ~~~~
