@@ -29,10 +29,10 @@ To successfully create and set up the csv2 container from scratch, the following
     $ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 3121 [your_username]@htc-dev.heprc.uvic.ca
     ~~~~
 
-2. Starting in the ansible_setup (/Git/docker/external_cloud/csv2/single_container/private_web/ansible_setup/) directory, use docker-compose to build and run the cloudscheduler container
+2. Starting in the ansible_setup directory, use docker-compose to build and run the cloudscheduler container
 
     ~~~~
-    $ cd ansible_setup
+    $ cd /Git/docker/external_cloud/csv2/single_container/private_web/ansible_setup/
     $ docker-compose down     # Needed only if there's an existing container running - this command will shut it down
     $ docker-compose build --no-cache     # Needed only if new updates have been pulled from this repo
     $ docker-compose up&
