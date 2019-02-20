@@ -74,7 +74,7 @@ To successfully create and set up the csv2 container from scratch, the following
     ~~~~
     $ cd /home/danikam1/Git/Inventory/heprc
     $ .bin/db_util sync
-    $ .bin/ansible_util htc-dev
+    $ sudo .bin/ansible_util htc-dev
     ~~~~
 
     The ansible_util should take ~30-40 minutes to complete. Once the ansible script has finished running, csv2 should be accessible at https://htc-dev.heprc.uvic.ca (or at https://localhost on the VM itself), and the phpmyadmin webpage should be accessible from a web browser running on the htc-dev VM at https://localhost:444/phpmyadmin. 
