@@ -51,6 +51,7 @@ To successfully run the condor container, the machine on which it will run shoul
 If you pulled the container image from another repo, or used a specific tag, you'll need to update the first line of the Dockerfile to use the correct image name and tag. The csv2 container can then be started using:
 
   ~~~~
+  $ cd cloud_scheduler
   $ docker-compose up&
   ~~~~
   
@@ -88,7 +89,7 @@ Navigate to the Defaults menu on the csv2 web interface, and replace the condor_
    Next, cd into the condor directory and run docker-compose up. Eg.
    
    ~~~~
-   $ cd docker/external_cloud/csv2/separated_containers/run_csv2/condor
+   $ cd ../condor
    $ docker-compose up&
    ~~~~
 
