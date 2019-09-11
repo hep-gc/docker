@@ -76,11 +76,7 @@ Password: csv2_pass
 
   The container is currently set up to run jobs on the otter testing cloud, but you can add or remove other clouds by pressing the "Clouds" tab at the top left of the csv2 web page, then pressing the "+" button that appears at the top left of the Clouds page.
   
-4.  Update the condor_fqdn variable for your machine.
-
-Navigate to the Defaults menu on the csv2 web interface, and replace the condor_fqdn variable with either the public IP address or the fully-qualified domain name of the machine that the csv2 container is running on.
-  
-5. Start up the condor container using docker-compose. 
+4. Start up the condor container using docker-compose. 
 
    First, ssh onto the machine on which you want to run condor (unless using the same machine as for csv2). If needed, clone this repo:
    
@@ -89,7 +85,7 @@ Navigate to the Defaults menu on the csv2 web interface, and replace the condor_
    Next, cd into the condor directory and run docker-compose up. Eg.
    
    ~~~~
-   $ cd ../condor
+   $ cd docker/external_cloud/csv2/separated_containers/run_csv2/condor
    $ docker-compose up&
    ~~~~
 
@@ -105,7 +101,7 @@ Navigate to the Defaults menu on the csv2 web interface, and replace the condor_
   $ docker ps
   ~~~~
   
-  Use the following command to start an interactive bash shell in the csv2 container:
+  Use the following command to start an interactive bash shell in the condor container:
   
   ~~~~
   $ docker exec -it [name of running condor container] /bin/bash
@@ -119,7 +115,7 @@ Navigate to the Defaults menu on the csv2 web interface, and replace the condor_
   $ condor_submit job.sh
   ~~~~
   
-   Press ctl-D to switch back to the root user. The job should appear on the cloud status webpage (https://htc-dev.heprc.uvic.ca/cloud/status/), and cloudscheduler will launch VMs to run the job. The VM should boot and start running the test job after ~5-10 minutes. 
+   Press ctrl-D to switch back to the root user. The job should appear on the cloud status webpage (https://htc-dev.heprc.uvic.ca/cloud/status/), and cloudscheduler will launch VMs to run the job. The VM should boot and start running the test job after ~5-10 minutes. 
 
   The status of the job can be checked using condor_q
 
